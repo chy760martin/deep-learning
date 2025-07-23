@@ -7,6 +7,8 @@
     - CNN(Convolution Neural Network) - 필기체손글씨 MNIST Dataset
     - CNN(Convolution Neural Network) - Fashion MNIST Dataset
     - CNN(Convolution Neural Network) - CIFAR10 Dataset
-3) RNN
-4) LSTM
-5) GRU
+    - Deep CNN(Convolutional Neural Network) - CIFAR10 Dataset
+3) Transfer Learning - 전이학습
+4) RNN
+5) LSTM
+6) GRU

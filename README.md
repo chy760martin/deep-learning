@@ -8,7 +8,7 @@
     - CNN(Convolution Neural Network) - Fashion MNIST Dataset
     - CNN(Convolution Neural Network) - CIFAR10 Dataset
     - Deep CNN(Convolutional Neural Network) - CIFAR10 Dataset
-3) Transfer Learning - 전이학습
+3) Transfer Learning - 전이학습, pre-trained models
 4) RNN
 5) LSTM
 6) GRU

@@ -11,6 +11,7 @@
 3) Transfer Learning(전이학습)
     - Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델)
     - Transfer Learning(전이학습) - ViT(Vision Transfomer), cats and dogs dataset
+    - Transfer Learning(전이학습) - ViT(Vision Transfomer), custom image(dog image) dataset
 4) RNN
 5) LSTM
 6) GRU

@@ -17,3 +17,4 @@
 5) LSTM
     - LSTM (Long Short-Term Memory) - 주가 예측(삼성전자)
 6) GRU
+    - GRU (Gated Reccurent Unit) - 주가 예측(삼성전자)

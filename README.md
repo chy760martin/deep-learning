@@ -13,5 +13,6 @@
     - Transfer Learning(전이학습) - ViT(Vision Transfomer), cats and dogs dataset
     - Transfer Learning(전이학습) - ViT(Vision Transfomer), custom image(dog image) dataset
 4) RNN
+    - 시퀀스 모델 RNN (Recurrent Neural Network)
 5) LSTM
 6) GRU

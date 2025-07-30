@@ -18,3 +18,22 @@
     - LSTM (Long Short-Term Memory) - 주가 예측(삼성전자)
 6) GRU
     - GRU (Gated Reccurent Unit) - 주가 예측(삼성전자)
+7) Seq2Seq
+    - Seq2Seq (Sequence-to-Sequence)
+8) YOLOv8
+    - YOLOv8 - Detaction
+    - YOLOv8 - Segmentation
+9) YOLO11
+    - YOLO11 - Detaction
+    - YOLO11 - Segmentation
+    - YOLO11 - Pose
+10) project
+    - 당뇨병 발병 예측 프로젝트
+    - 타이타닉 생존자 예측 프로젝트
+    - GTSRB 프로젝트
+    - Surface Crack Detection 프로젝트
+    - Brain Tumor Classification(MRI) 프로젝트
+    - COVID 19 Radiography 프로젝트
+    - Breast Ultrasound Image Classification 프로젝트
+    - 기계 번역 프로젝트
+    - LLM 프로젝트

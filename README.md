@@ -36,4 +36,4 @@
     - COVID 19 Radiography 프로젝트
     - Breast Ultrasound Image Classification 프로젝트
     - 기계 번역 프로젝트
-    - LLM 프로젝트
+    - LLM 프로젝트 

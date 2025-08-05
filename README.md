@@ -21,12 +21,12 @@
 7) Seq2Seq
     - Seq2Seq (Sequence-to-Sequence)
 8) YOLOv8
-    - YOLOv8 - Detaction
-    - YOLOv8 - Segmentation
+    - YOLOv8 - Object Detaction
+    - YOLOv8 - Instance Segmentation
 9) YOLO11
-    - YOLO11 - Detaction
-    - YOLO11 - Segmentation
-    - YOLO11 - Pose
+    - YOLO11 - Object Detaction
+    - YOLO11 - Instance Segmentation
+    - YOLO11 - Pose Estimation
 10) project
     - 당뇨병 발병 예측 프로젝트
     - 타이타닉 생존자 예측 프로젝트

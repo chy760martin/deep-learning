@@ -28,7 +28,7 @@
     - YOLO11 - Instance Segmentation
     - YOLO11 - Pose Estimation
 10) project
-    - 당뇨병 발병 예측 프로젝트
+    - Kaggle Pima Indians Diabetes Dataset - 당뇨병 발병 예측 프로젝트
     - 타이타닉 생존자 예측 프로젝트
     - GTSRB 프로젝트
     - Surface Crack Detection 프로젝트

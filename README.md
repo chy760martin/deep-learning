@@ -29,7 +29,7 @@
     - YOLO11 - Pose Estimation
 10) project
     - Kaggle Pima Indians Diabetes Dataset - 당뇨병 발병 예측 프로젝트
-    - 타이타닉 생존자 예측 프로젝트
+    - Kaggle Titanic Dataset - 타이타닉 생존자 예측 프로젝트
     - GTSRB 프로젝트
     - Surface Crack Detection 프로젝트
     - Brain Tumor Classification(MRI) 프로젝트

@@ -30,10 +30,9 @@
 10) project
     - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측 프로젝트
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측 프로젝트
-    - Kaggle Breast Ultrasound Image Classification - Kaggle 유방 초음파 이미지 분류
+    - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, 512x512
     - GTSRB 프로젝트
     - Surface Crack Detection 프로젝트
-    - Brain Tumor Classification(MRI) 프로젝트
     - COVID 19 Radiography 프로젝트
     - Breast Ultrasound Image Classification 프로젝트
     - 기계 번역 프로젝트

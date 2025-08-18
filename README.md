@@ -30,7 +30,7 @@
 10) project
     - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
-    - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, 512x512
+    - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - GTSRB
     - Surface Crack Detection
     - COVID 19 Radiography

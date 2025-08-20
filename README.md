@@ -32,7 +32,7 @@
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
     - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - GTSRB (German Traffic Sign Recognition Benchmark) - 표지판(Traffic sign) 이미지 분류, CNN 모델 아키텍처 적용
-    - Kaggle Surface Crack Detection - 콘크리트 표면 결함 (Surface Crack Detection) 이미지 분류
+    - Kaggle Surface Crack Detection - 콘크리트 표면 결함 (Surface Crack Detection) 이미지 분류, CNN 모델 아키텍처 적용
     - COVID 19 Radiography
     - Breast Ultrasound Image Classification
     - 기계 번역 프로젝트

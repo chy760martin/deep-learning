@@ -33,7 +33,7 @@
     - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - GTSRB (German Traffic Sign Recognition Benchmark) - 표지판(Traffic sign) 이미지 분류, CNN 모델 아키텍처 적용
     - Kaggle Surface Crack Detection - 콘크리트 표면 결함 (Surface Crack Detection) 이미지 분류, CNN 모델 아키텍처 적용
-    - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 
+    - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Breast Ultrasound Image Classification
     - 기계 번역 프로젝트
     - LLM 프로젝트

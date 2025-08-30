@@ -22,6 +22,7 @@
 
 <br>
 <h2> Deep Learning </h2>
+
 1) MLP
     - MLP(Multi-Layer Perceptron) basic
     - MLP(Multi-Layer Perceptron) - 필기체손글씨 MNIST Dataset

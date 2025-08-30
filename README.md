@@ -36,5 +36,5 @@
     - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Breast Ultrasound Image Classification - Kaggle Breast Ultrasound (유방초음파), normal(정상), benign(양성), malignant(악성) 예측 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Dog Breed Image Classification Dataset - Kaggle Dog Breed Image 은 개 품종 예측 이미지 분류
-    - 기계 번역 프로젝트
-    - LLM 프로젝트
+11) LLM
+    - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)

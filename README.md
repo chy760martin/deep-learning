@@ -58,3 +58,4 @@
     - Kaggle Dog Breed Image Classification Dataset - Kaggle Dog Breed Image 은 개 품종 예측 이미지 분류
 11) LLM
     - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)
+    - Transformers - 트랜스포머 허깅페이스(라이브러리)

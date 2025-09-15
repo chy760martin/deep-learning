@@ -62,4 +62,5 @@
     - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, 한국어 기사(연합뉴스 데이터셋) 제목을 바탕으로 기사의 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(klue/roberta-base) 적용
     - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, MRPC(Microsoft Research Paraphrase Corpus) 데이터셋 바탕으로 레이블(1:유사,0:비유사) 영어 문장 유사도 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(bert-base-uncased) 적용
     - Transformers - 기초적인 문장 데이터셋 적용하여 Small Language Model(SLLM) 구축 및 텍스트 생성
-    - Transformers - 트랜스포머 허깅페이스 데이터셋(WikiText-2)을 적용하여 Small Language Model(SLLM) 구축 및 텍스트 생성
+    - Transformers - 트랜스포머 허깅페이스 데이터셋(WikiText-2)을 적용하여 영어 Small Language Model(SLLM) 구축 및 텍스트 생성
+    - Transformers - 트랜스포머 허깅페이스 데이터셋(ShareGPT-KO)을 적용하여 한글 Small Language Model(SLLM) 구축 및 텍스트 생성

@@ -64,3 +64,4 @@
     - Transformers - 기초적인 문장 데이터셋 적용하여 Small Language Model(SLLM) 구축 및 텍스트 생성
     - Transformers - 트랜스포머 허깅페이스 데이터셋(WikiText-2)을 적용하여 영어 Small Language Model(SLLM) 구축 및 텍스트 생성
     - Transformers - 트랜스포머 허깅페이스 데이터셋(ShareGPT-KO)을 적용하여 한글 Small Language Model(SLLM) 구축 및 텍스트 생성
+    - Transformers - 트랜스포머 데이터셋(ChatbotData)을 적용하여 한글 Small Language Model(SLLM) 구축 및 텍스트 생성

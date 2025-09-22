@@ -20,9 +20,16 @@
 <h2> Deep Learning </h2>
 
 1) MLP
-    - MLP(Multi-Layer Perceptron) basic
-    - MLP(Multi-Layer Perceptron) - 필기체손글씨 MNIST Dataset
-    - MLP(Multi-Layer Perceptron) - Fashion MNIST Dataset
+    - MLP(Multi-Layer Perceptron) DeepLearning - 01_mlp.ipynb
+        -> MLP 모델을 기반으로 성능 평가 및 시각화 강화
+        -> Dataset 및 DataLoader를 활용한 데이터 처리
+        -> 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+        -> 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+        -> 모델 저장 및 불러오기
+        -> 테스트 및 시각화
+
+    - MLP(Multi-Layer Perceptron) DeepLearning - 필기체손글씨 MNIST Dataset
+    - MLP(Multi-Layer Perceptron) DeepLearning - Fashion MNIST Dataset
 2) CNN
     - CNN(Convolution Neural Network) - 필기체손글씨 MNIST Dataset
     - CNN(Convolution Neural Network) - Fashion MNIST Dataset

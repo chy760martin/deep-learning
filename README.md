@@ -19,13 +19,14 @@
 <br>
 <h2> Deep Learning </h2>
 
-### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용, 01_mlp.ipynb
+### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용, 01_mlp.ipynb, app_01_mlp_model.py, app_01_mlp_model_csv_upload.py, app_01_mlp_model_csv_upload_download.py
 1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
 2. Dataset 및 DataLoader를 활용한 데이터 처리
 3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
 4. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
 5. 모델 저장 및 불러오기
 6. 테스트 및 시각화
+7. 웹에서 MLP 이진 뷴류기 데모 - 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남, CSV 업로드를 통한 배치 예측 및 시각화, 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
 ---
     - MLP(Multi-Layer Perceptron) DeepLearning - 필기체손글씨 MNIST Dataset
     - MLP(Multi-Layer Perceptron) DeepLearning - Fashion MNIST Dataset

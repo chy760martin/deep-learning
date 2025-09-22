@@ -19,7 +19,8 @@
 <br>
 <h2> Deep Learning </h2>
 
-### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용, 01_mlp.ipynb, app_01_mlp_model.py, app_01_mlp_model_csv_upload.py, app_01_mlp_model_csv_upload_download.py
+### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용
+> 01_mlp.ipynb, app_01_mlp_model.py, app_01_mlp_model_csv_upload.py, app_01_mlp_model_csv_upload_download.py
 1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
 2. Dataset 및 DataLoader를 활용한 데이터 처리
 3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)

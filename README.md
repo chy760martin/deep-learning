@@ -19,9 +19,9 @@
 <br>
 <h2> Deep Learning </h2>
 
-1) MLP
-    - MLP(Multi-Layer Perceptron) DeepLearning - 01_mlp.ipynb
-        -> MLP 모델을 기반으로 성능 평가 및 시각화 강화
+# MLP
+    ## MLP(Multi-Layer Perceptron) DeepLearning - 01_mlp.ipynb
+        > MLP 모델을 기반으로 성능 평가 및 시각화 강화
         -> Dataset 및 DataLoader를 활용한 데이터 처리
         -> 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
         -> 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)

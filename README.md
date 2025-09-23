@@ -29,7 +29,18 @@
 6. 테스트 및 시각화
 7. 웹에서 MLP 이진 뷴류기 데모 - 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남, CSV 업로드를 통한 배치 예측 및 시각화, 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
 ---
-    - MLP(Multi-Layer Perceptron) DeepLearning - 필기체손글씨 MNIST Dataset
+### 2. MLP(Multi-Layer Perceptron) DeepLearning : 필기체손글씨 MNIST Dataset 사용
+> 02_mlp_mnist_gpu.ipynb, app_02_mlp_mnist_model.py
+1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가 
+5. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+6. 모델 저장 및 불러오기
+7. 테스트 및 시각화
+8. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택), 모델 추론(학습된 MLP 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+---
+
     - MLP(Multi-Layer Perceptron) DeepLearning - Fashion MNIST Dataset
 2) CNN
     - CNN(Convolution Neural Network) - 필기체손글씨 MNIST Dataset

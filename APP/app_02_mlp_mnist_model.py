@@ -20,6 +20,7 @@ from sklearn.metrics import confusion_matrix, classification_report
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
 
 # 모델 클래스 정의
 class MLPDeepLearningModel(nn.Module):
@@ -40,10 +41,14 @@ class MLPDeepLearningModel(nn.Module):
         x = self.fc2(x) # 출력층
         return x
 
+# 경로 구성
+base_dir = os.path.dirname(__file__)  # 현재 파일 기준 디렉토리
+model_path = os.path.join(base_dir, '..', 'models', 'model_mlp_mnist.ckpt')
+
 # 모델 로딩
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = MLPDeepLearningModel().to(DEVICE)
-model.load_state_dict(torch.load('../models/model_mlp_mnist.ckpt'))
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
 # MNIST 데이터셋 로딩

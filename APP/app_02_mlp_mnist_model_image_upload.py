@@ -22,6 +22,7 @@ from streamlit_drawable_canvas import st_canvas
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
 
 # 모델 클래스 정의
 class MLPDeepLearningModel(nn.Module):
@@ -45,9 +46,13 @@ class MLPDeepLearningModel(nn.Module):
 # GPU 설정
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+# 경로 구성
+base_dir = os.path.dirname(__file__)  # 현재 파일 기준 디렉토리
+model_path = os.path.join(base_dir, '..', 'models', 'model_mlp_mnist.ckpt')
+
 # 모델 로딩
 model = MLPDeepLearningModel().to(DEVICE)
-model.load_state_dict(torch.load('../models/model_mlp_mnist.ckpt'))
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
 # MNIST 테스트 데이터셋 로딩
@@ -144,12 +149,28 @@ elif mode == "직접 그리기":
     if canvas_result.image_data is not None:
         image_data = canvas_result.image_data
 
+        def center_image(img):
+            img = np.array(img)
+            coords = np.column_stack(np.where(img > 0))
+            if coords.size == 0:
+                return Image.fromarray(img)
+            y_min, x_min = coords.min(axis=0)
+            y_max, x_max = coords.max(axis=0)
+            cropped = img[y_min:y_max+1, x_min:x_max+1]
+            canvas = np.zeros((28, 28), dtype=np.uint8)
+            h, w = cropped.shape
+            y_offset = (28 - h) // 2
+            x_offset = (28 - w) // 2
+            canvas[y_offset:y_offset+h, x_offset:x_offset+w] = cropped
+            return Image.fromarray(canvas)
+
         if np.std(image_data) < 1:
             st.warning("이미지가 너무 희미하거나 비어 있습니다. 숫자를 굵게 그려주세요.")
         else:
             image = Image.fromarray((image_data[:, :, :3]).astype('uint8')).convert('L')
             image = ImageOps.invert(image)
             image = image.resize((28, 28))
+            image = center_image(image)
 
             st.image(image, caption='그린 숫자', width=150)
 
@@ -162,6 +183,19 @@ elif mode == "직접 그리기":
             # 모델 추론 (모델은 미리 로딩되어 있어야 함)
             with torch.no_grad():
                 output = model(input_tensor)
-                pred = torch.argmax(output, dim=1).item()
+                # pred = torch.argmax(output, dim=1).item()
+                probabilities = torch.nn.functional.softmax(output, dim=1).squeeze().numpy()
+                pred = int(np.argmax(probabilities))
 
             st.success(f'모델 예측 결과: {pred}')
+            st.markdown(f"### ✏️ 모델이 인식한 숫자: `{pred}`")
+
+            # 예측 확률 막대그래프
+            fig, ax = plt.subplots()
+            ax.bar(range(10), probabilities, color='skyblue')
+            ax.set_xticks(range(10))
+            ax.set_xlabel('Num Class')
+            ax.set_ylabel('Prediction')
+            ax.set_title('Model Prediction')
+
+            st.pyplot(fig)

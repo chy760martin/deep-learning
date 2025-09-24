@@ -182,8 +182,11 @@ elif mode == "직접 그리기":
 
             # 모델 추론 (모델은 미리 로딩되어 있어야 함)
             with torch.no_grad():
+                # output은 모델의 최종 출력 텐서, 보통 shape은 [1, 10](숫자 0~9에 대한 로짓 값)
                 output = model(input_tensor)
                 # pred = torch.argmax(output, dim=1).item()
+                # softmax()를 통해 각 클래스에 대한 확률로 변환, squeeze()는 배치 차원을 제거해 1D 배열로 만든다, numpy()는 넘파이 데이터로 만든다.
+                # .squeeze()는 불필요한 차원을 제거 [1, 10] -> [10]으로 바꿔서 1D 배열로 만든다.
                 probabilities = torch.nn.functional.softmax(output, dim=1).squeeze().numpy()
                 pred = int(np.argmax(probabilities))
 

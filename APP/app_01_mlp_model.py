@@ -6,6 +6,7 @@ import torch
 from torch import nn
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # 모델 클래스 정의
 class MLPModel(nn.Module):
@@ -22,9 +23,13 @@ class MLPModel(nn.Module):
         x = self.net(x)
         return x
 
+# 경로 구성
+base_dir = os.path.dirname(__file__)  # 현재 파일 기준 디렉토리
+model_path = os.path.join(base_dir, '..', 'models', 'mlp_model.ckpt')
+
 # 모델 로딩
 model = MLPModel()
-model.load_state_dict(torch.load('../models/mlp_model.ckpt'))
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
 # Streamlit UI

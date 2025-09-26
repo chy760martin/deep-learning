@@ -7,6 +7,7 @@ from PIL import Image
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as TF
 import numpy as np
+import matplotlib.pyplot as plt
 import os
 
 # 모델 클래스 정의(MLPDeepLearningModel)
@@ -61,18 +62,26 @@ if uploaded_file is not None:
     st.image(image, caption='업로드된 이미지', width='stretch')
 
     # 전처리 및 추론
-    img_tensor = transform(image).unsqueeze(0) # 차원 추가
+    img_tensor = transform(image).unsqueeze(0).to(DEVICE) # 차원 추가
     pil_image = TF.to_pil_image(img_tensor.squeeze())
     st.image(pil_image, caption='전처리된 이미지', width='stretch')
     with torch.no_grad():
-        output = model(img_tensor) # 모델 추론
+        output = model(img_tensor).to(DEVICE) # 모델 추론
         _, pred = torch.max(output, dim=1) # 모델 추론값 추출
         label = labels_map[pred.item()]
     
     st.success(f'예측 결과: **{label}**')
 
-    # 예측 확률 시각화 추가 위치
-    probs = torch.nn.functional.softmax(output, dim=1)
-    st.subheader("📊 클래스별 예측 확률")
-    for i, p in enumerate(probs[0]):
+    # 예측 확률 시각화
+    # probs = torch.nn.functional.softmax(output, dim=1)
+    probs = torch.nn.functional.softmax(output, dim=1).squeeze().cpu().numpy()
+    st.subheader("클래스별 예측 확률")   
+    
+    # 예측 확률 막대그래프
+    fig, ax = plt.subplots()
+    ax.bar(labels_map.values(), probs)
+    st.pyplot(fig)
+
+    # for i, p in enumerate(probs[0]):
+    for i, p in enumerate(probs):
         st.write(f"{labels_map[i]}: {p.item():.2%}")

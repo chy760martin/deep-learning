@@ -74,10 +74,21 @@
 6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
 7. 모델 저장 및 불러오기
 8. 테스트 및 시각화
-9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측)
+---
+### 5. CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
+> 06_cnn_cifar10_gpu.ipynb, app_06_cnn_cifar10.py
+1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
+6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+7. 모델 저장 및 불러오기
+8. 테스트 및 시각화
+9. 웹에서 CIFAR10 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측)
 ---
 2) CNN
-    - CNN(Convolution Neural Network) - CIFAR10 Dataset
     - Deep CNN(Convolutional Neural Network) - CIFAR10 Dataset
 3) Transfer Learning(전이학습)
     - Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델)

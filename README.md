@@ -76,7 +76,7 @@
 8. 테스트 및 시각화
 9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측)
 ---
-### 5. CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
+### 6. CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
 > 06_cnn_cifar10_gpu.ipynb, app_06_cnn_cifar10.py
 1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
 2. Dataset 및 DataLoader를 활용한 데이터 처리

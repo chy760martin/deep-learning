@@ -9,7 +9,7 @@
 # 3. 결과 시각화
 # - 예측 결과 출력 (정답 vs 예측)
 # - Confusion Matrix 및 오차 분석
-# - 틀린 예측 샘플 시각화
+# - 틀린 예측 샘플 시각화 (추후 확장 가능)
 
 import streamlit as st
 import torch

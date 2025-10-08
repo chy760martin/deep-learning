@@ -1,4 +1,6 @@
 # CIFAR10 CNN 모델을 Streamlit 으로 웹서비스화
+# 사용자가 이미지를 업로드하면 예측 결과가 바로 표시되고, 클래스별 예측 확률이 막대그래프로 나타남
+# 사용법 : ./APP> streamlit run app_06_cnn_cifar10.py
 
 import streamlit as st
 import torch

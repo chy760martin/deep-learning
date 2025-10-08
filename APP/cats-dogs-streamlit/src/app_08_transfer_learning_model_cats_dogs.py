@@ -22,8 +22,6 @@
 # - 앱은 사용자가 쉽게 접근하고 사용할 수 있도록 설계
 # - 모델은 torchvision의 vit_b_16 사전학습 모델을 기반으로 함
 
-
-
 import streamlit as st
 import torch
 from torchvision import models, transforms

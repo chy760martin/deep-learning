@@ -1,6 +1,6 @@
 # MLP 이진 뷴류기 데모
 # 사용법 : ./APP> streamlit run app_mlp_model.py
-# 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남
+# 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남 (실시간 그래프)
 import streamlit as st
 import torch
 from torch import nn

@@ -1,7 +1,7 @@
 # MLP 이진 뷴류기 데모
 # 사용법 : ./APP> streamlit run app_01_mlp_model_csv_upload_download.py
 # 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남
-# CSV 업로드를 통한 배치 예측 및 시각화
+# CSV 업로드를 통한 배치 예측 및 시각화 기능 추가
 # 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
 
 import streamlit as st

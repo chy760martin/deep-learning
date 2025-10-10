@@ -17,7 +17,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def load_model():
     base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
     model = TransferLearningModel(base_model, feature_extractor=True, num_classes=4).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 강아지 4 클래스
+    
     model_path = os.path.join("models", "model_transfer_learning_dog_image.ckpt") # - 학습된 모델 가중치 로드
+    if not os.path.exists(model_path):
+        st.error(f"모델 파일을 찾을 수 없습니다: {model_path}")
+        st.stop()
+
     model.load_state_dict(torch.load(model_path, map_location=device)) # - 학습된 모델 가중치 로드
     model.eval() # - 추론 모드로 전환
     return model
@@ -80,6 +85,6 @@ if uploaded_file is not None: # - 파일이 업로드되었을 때
         st.bar_chart( {labels_map[i]: prob for i, prob in enumerate(probabilities)} )
     except Exception as e:
         st.error(f"예측 처리 중 오류가 발생했습니다: {e}")
-        
+
     st.markdown("---")
     st.caption("Powered by Vision Transformer (ViT) + Transfer Learning")

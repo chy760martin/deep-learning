@@ -120,18 +120,19 @@
 7. Streamlit 앱 - 고양이와 강아지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 고양이인지 강아지인지 예측
 ---
 ### 9. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 강아지 종 Dataset 사용
-> Model - 10_transfer_learning_vit_custom_image_gpu.ipynb
+> Model - 10_transfer_learning_vit_custom_image_gpu.ipynb, app_10_transfer_learning_model_dog_image.py
 > Streamlit 웹앱 기본 구조 
-> - 
-> - 
-> - 
+> - dogs-image-streamlit/src/app_10_transfer_learning_model_dog_image.py
+> - dogs-image-streamlit/src/model_utils.py
+> - dogs-image-streamlit/src/labels_map.json
+> - dogs-image-streamlit/models/model_transfer_learning_dog_image.ckpt
 1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
 2. Dataset 및 DataLoader를 활용한 데이터 처리
 3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
 4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
 5. 모델 저장 및 불러오기
 6. 테스트 및 시각화
-7. Streamlit 앱 - 강아지 종 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 고양이인지 강아지인지 예측
+7. Streamlit 앱 - 강아지 종 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 무슨 강아지인지 예측
 ---
 
 3) Transfer Learning(전이학습)

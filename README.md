@@ -149,23 +149,25 @@
 6. 테스트 및 시각화
 7. Streamlit 앱 - 강아지 감정 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 강아지 감정 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
 ---
+### 12. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류 데이터셋 사용
+> Model - 12_transfer_learning_kaggle_brain_tumor_mri.ipynb
+> Streamlit 웹앱 기본 구조 
+> - brain-tumor-streamlit/src/app_12_transfer_learning_model_brain_tumor.py
+> - brain-tumor-streamlit/src/model_utils.py
+> - brain-tumor-streamlit/src/labels_map.json
+> - brain-tumor-streamlit/models/model_transfer_learning_brain_tumor_mri.ckpt
+1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. Streamlit 앱 - Kaggle 뇌종양(Brain Tumor) 이미지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 뇌종양(brain tumor) 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+---
 
-4) RNN
-    - 시퀀스 모델 RNN (Recurrent Neural Network) - RNN, LSTM, GRU API
-5) LSTM
-    - LSTM (Long Short-Term Memory) - 주가 예측(삼성전자)
-6) GRU
-    - GRU (Gated Reccurent Unit) - 주가 예측(삼성전자)
-7) Seq2Seq
-    - Seq2Seq (Sequence-to-Sequence)
-8) YOLOv8
-    - YOLOv8 - Object Detection
-    - YOLOv8 - Instance Segmentation
-9) YOLO11
-    - YOLO11 - Object Detection
-    - YOLO11 - Instance Segmentation
-    - YOLO11 - Pose Estimation
-10) project
+
+
+project
     - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
     - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
@@ -174,7 +176,7 @@
     - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Breast Ultrasound Image Classification - Kaggle Breast Ultrasound (유방초음파), normal(정상), benign(양성), malignant(악성) 예측 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Dog Breed Image Classification Dataset - Kaggle Dog Breed Image 은 개 품종 예측 이미지 분류
-11) LLM
+LLM
     - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)
     - Transformers - 트랜스포머 허깅페이스(라이브러리)
     - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, 한국어 기사(연합뉴스 데이터셋) 제목을 바탕으로 기사의 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(klue/roberta-base) 적용

@@ -19,120 +19,21 @@
 <br>
 <h2> Deep Learning </h2>
 
-### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용
-> Model - 01_mlp.ipynb
-> Streamlit 웹앱 - app_01_mlp_model.py, app_01_mlp_model_csv_upload.py, app_01_mlp_model_csv_upload_download.py
-1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-5. 모델 저장 및 불러오기
-6. 테스트 및 시각화
-7. 웹에서 MLP 이진 뷴류기 데모 - 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남, CSV 업로드를 통한 배치 예측 및 시각화, 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
 ---
-### 2. MLP(Multi-Layer Perceptron) DeepLearning : 필기체손글씨 MNIST Dataset 사용
-> Model - 02_mlp_mnist_gpu.ipynb
-> Streamlit 웹앱 - app_02_mlp_mnist_model.py, app_02_mlp_mnist_model_image_upload.py
-1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가 
-5. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-6. 모델 저장 및 불러오기
-7. 테스트 및 시각화
-8. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 MLP 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
----
-### 3. MLP(Multi-Layer Perceptron) DeepLearning : Fashion MNIST Dataset 사용
-> Model - 03_mlp_fashion_mnist_gpu.ipynb
-> Streamlit 웹앱 - app_03_mlp_fashion_mnist.py
-1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
-6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-7. 모델 저장 및 불러오기
-8. 테스트 및 시각화
-9. 웹에서 Fashion MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택), 모델 추론(학습된 MLP 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
----
-### 4. CNN(Convolution Neural Network) : 필기체손글씨 MNIST Dataset 사용
-> Model - 04_cnn_mnist_gpu.ipynb
-> Streamlit 웹앱 - app_04_cnn_mnist.py
-1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
-6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-7. 모델 저장 및 불러오기
-8. 테스트 및 시각화
-9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
----
-### 5. CNN(Convolution Neural Network) : Fashion MNIST Dataset 사용
-> Model - 05_cnn_fashion_mnist_gpu.ipynb
-> Streamlit 웹앱 - app_05_cnn_fashion_mnist.py
-1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
-6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-7. 모델 저장 및 불러오기
-8. 테스트 및 시각화
-9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론 학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측))
----
-### 6. CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
-> Model - 06_cnn_cifar10_gpu.ipynb
-> Streamlit 웹앱 - app_06_cnn_cifar10.py
-1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
-6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
-7. 모델 저장 및 불러오기
-8. 테스트 및 시각화
-9. 웹에서 CIFAR10 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력))
----
-### 7. Deep CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
-> Model - 07_deep_cnn_cifar10_gpu.ipynb
-> Streamlit 웹앱 - app_07_deep_cnn_cifar10.py
-1. Deep CNN 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 모델 저장 및 불러오기
-6. 테스트 및 시각화
-7. 웹에서 CIFAR10 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력))
----
-### 8. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 고양이와 강아지 Dataset 사용
-> Model - 09_transfer_learning_cats_dogs_gpu.ipynb
+### 12. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류 데이터셋 사용
+> Model - 12_transfer_learning_kaggle_brain_tumor_mri.ipynb
 > Streamlit 웹앱 기본 구조 
-> - cats-dogs-streamlit/src/app_08_transfer_learning_model_cats_dogs.py
-> - cats-dogs-streamlit/src/model_utils.py
-> - cats-dogs-streamlit/models/transfer_learning_model_cats_dogs.pth
-1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
-2. Dataset 및 DataLoader를 활용한 데이터 처리
-3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
-4. 학습 및 평가 train, evaluate 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
-5. 모델 저장 및 불러오기
-6. 테스트 및 시각화
-7. Streamlit 앱 - 고양이와 강아지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 고양이인지 강아지인지 예측
----
-### 9. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 강아지 종 Dataset 사용
-> Model - 10_transfer_learning_vit_custom_image_gpu.ipynb
-> Streamlit 웹앱 기본 구조 
-> - dogs-image-streamlit/src/app_10_transfer_learning_model_dog_image.py
-> - dogs-image-streamlit/src/model_utils.py
-> - dogs-image-streamlit/src/labels_map.json
-> - dogs-image-streamlit/models/model_transfer_learning_dog_image.ckpt
+> - brain-tumor-streamlit/src/app_12_transfer_learning_model_brain_tumor.py
+> - brain-tumor-streamlit/src/model_utils.py
+> - brain-tumor-streamlit/src/labels_map.json
+> - brain-tumor-streamlit/models/model_transfer_learning_brain_tumor_mri.ckpt
 1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
 2. Dataset 및 DataLoader를 활용한 데이터 처리
 3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
 4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
 5. 모델 저장 및 불러오기
 6. 테스트 및 시각화
-7. Streamlit 앱 - 강아지 종 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 무슨 강아지인지 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+7. Streamlit 앱 - Kaggle 뇌종양(Brain Tumor) 이미지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 뇌종양(brain tumor) 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
 ---
 ### 10. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 강아지 감정 Dataset 사용
 > Model - 11_transfer_learning_vit_dog_emotion_gpu.ipynb
@@ -149,23 +50,124 @@
 6. 테스트 및 시각화
 7. Streamlit 앱 - 강아지 감정 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 강아지 감정 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
 ---
+### 9. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 강아지 종 Dataset 사용
+> Model - 10_transfer_learning_vit_custom_image_gpu.ipynb
+> Streamlit 웹앱 기본 구조 
+> - dogs-image-streamlit/src/app_10_transfer_learning_model_dog_image.py
+> - dogs-image-streamlit/src/model_utils.py
+> - dogs-image-streamlit/src/labels_map.json
+> - dogs-image-streamlit/models/model_transfer_learning_dog_image.ckpt
+1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. Streamlit 앱 - 강아지 종 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 무슨 강아지인지 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+---
+### 8. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : 고양이와 강아지 Dataset 사용
+> Model - 09_transfer_learning_cats_dogs_gpu.ipynb
+> Streamlit 웹앱 기본 구조 
+> - cats-dogs-streamlit/src/app_08_transfer_learning_model_cats_dogs.py
+> - cats-dogs-streamlit/src/model_utils.py
+> - cats-dogs-streamlit/models/transfer_learning_model_cats_dogs.pth
+1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. Streamlit 앱 - 고양이와 강아지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 고양이인지 강아지인지 예측
+---
+### 7. Deep CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
+> Model - 07_deep_cnn_cifar10_gpu.ipynb
+> Streamlit 웹앱 - app_07_deep_cnn_cifar10.py
+1. Deep CNN 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. 웹에서 CIFAR10 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력))
+---
+### 6. CNN(Convolution Neural Network) : CIFAR10 Dataset 사용
+> Model - 06_cnn_cifar10_gpu.ipynb
+> Streamlit 웹앱 - app_06_cnn_cifar10.py
+1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
+6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+7. 모델 저장 및 불러오기
+8. 테스트 및 시각화
+9. 웹에서 CIFAR10 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력))
+---
+### 5. CNN(Convolution Neural Network) : Fashion MNIST Dataset 사용
+> Model - 05_cnn_fashion_mnist_gpu.ipynb
+> Streamlit 웹앱 - app_05_cnn_fashion_mnist.py
+1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
+6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+7. 모델 저장 및 불러오기
+8. 테스트 및 시각화
+9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(사용자가 직접 이미지 업로드), 모델 추론 학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측))
+---
+### 4. CNN(Convolution Neural Network) : 필기체손글씨 MNIST Dataset 사용
+> Model - 04_cnn_mnist_gpu.ipynb
+> Streamlit 웹앱 - app_04_cnn_mnist.py
+1. CNN 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
+6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+7. 모델 저장 및 불러오기
+8. 테스트 및 시각화
+9. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 CNN 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+---
+### 3. MLP(Multi-Layer Perceptron) DeepLearning : Fashion MNIST Dataset 사용
+> Model - 03_mlp_fashion_mnist_gpu.ipynb
+> Streamlit 웹앱 - app_03_mlp_fashion_mnist.py
+1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 학습률 개선, StepLR(일정 에폭마다 학습률을 감소), EarlyStopping(일정 에폭 동안 성능 향상이 없을 경우 학습을 조기 중단, 과적합 방지, 학습 시간 절약) 
+6. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+7. 모델 저장 및 불러오기
+8. 테스트 및 시각화
+9. 웹에서 Fashion MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택), 모델 추론(학습된 MLP 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+---
+### 2. MLP(Multi-Layer Perceptron) DeepLearning : 필기체손글씨 MNIST Dataset 사용
+> Model - 02_mlp_mnist_gpu.ipynb
+> Streamlit 웹앱 - app_02_mlp_mnist_model.py, app_02_mlp_mnist_model_image_upload.py
+1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가 
+5. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+6. 모델 저장 및 불러오기
+7. 테스트 및 시각화
+8. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 MLP 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+---
+### 1. MLP(Multi-Layer Perceptron) DeepLearning : basic dataset 사용
+> Model - 01_mlp.ipynb
+> Streamlit 웹앱 - app_01_mlp_model.py, app_01_mlp_model_csv_upload.py, app_01_mlp_model_csv_upload_download.py
+1. MLP 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 정확도 계산(accuracy_score), 혼돈 행렬 계산(confusion_matrix), Confusion Matrix 시각화, 정밀도, 재현율, F1-score 등 출력(classification_report)
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. 웹에서 MLP 이진 뷴류기 데모 - 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남, CSV 업로드를 통한 배치 예측 및 시각화, 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
+---
 
-4) RNN
-    - 시퀀스 모델 RNN (Recurrent Neural Network) - RNN, LSTM, GRU API
-5) LSTM
-    - LSTM (Long Short-Term Memory) - 주가 예측(삼성전자)
-6) GRU
-    - GRU (Gated Reccurent Unit) - 주가 예측(삼성전자)
-7) Seq2Seq
-    - Seq2Seq (Sequence-to-Sequence)
-8) YOLOv8
-    - YOLOv8 - Object Detection
-    - YOLOv8 - Instance Segmentation
-9) YOLO11
-    - YOLO11 - Object Detection
-    - YOLO11 - Instance Segmentation
-    - YOLO11 - Pose Estimation
-10) project
+
+project
     - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
     - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
@@ -174,7 +176,7 @@
     - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Breast Ultrasound Image Classification - Kaggle Breast Ultrasound (유방초음파), normal(정상), benign(양성), malignant(악성) 예측 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - Kaggle Dog Breed Image Classification Dataset - Kaggle Dog Breed Image 은 개 품종 예측 이미지 분류
-11) LLM
+LLM
     - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)
     - Transformers - 트랜스포머 허깅페이스(라이브러리)
     - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, 한국어 기사(연합뉴스 데이터셋) 제목을 바탕으로 기사의 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(klue/roberta-base) 적용

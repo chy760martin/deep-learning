@@ -38,7 +38,7 @@ class TransferLearningModel(nn.Module):
 # 모델 로딩 함수 - 모델을 불러올 때 사용
 def load_model(model_path, device): # model_path: 저장된 모델 경로, device: 'cpu' 또는 'cuda'
     base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT)
-    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device)
+    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=4).to(device)
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.eval()
     return model

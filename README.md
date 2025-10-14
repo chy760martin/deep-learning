@@ -33,7 +33,7 @@
 4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
 5. 모델 저장 및 불러오기
 6. 테스트 및 시각화
-7. Streamlit 앱 - Kaggle 뇌종양(Brain Tumor) 이미지 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 뇌종양(brain tumor) 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+7. Streamlit 앱 - Kaggle 얼굴에 마스크(face mask detection) 착용 분류기 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 얼굴에 마스크 착용 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
 ---
 ### 12. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류 데이터셋 사용
 > Model - 12_transfer_learning_kaggle_brain_tumor_mri.ipynb

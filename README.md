@@ -18,6 +18,7 @@
 
 <br>
 <h2> Deep Learning </h2>
+
 ---
 ### 13. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Face Mask Detection Classification - Kaggle 얼굴에 마스크(face mask detection) 이미지 분류 데이터셋 사용
 > Model - 13_transfer_learning_kaggle_face_mask_detection.ipynb

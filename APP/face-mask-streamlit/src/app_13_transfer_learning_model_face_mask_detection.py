@@ -20,7 +20,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def load_model():
     # base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
     base_model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT) # ResNet 모델을 사전학습 가중치로 불러옴.
-    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 마스크 착용 여부 4 클래스
+    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 마스크 착용 여부 2 클래스
 
     model_path = os.path.join("models", "model_transfer_learning_face_mask_detection.ckpt") # - 학습된 모델 가중치 로드
     if not os.path.exists(model_path):
@@ -32,6 +32,23 @@ def load_model():
     return model
 
 model = load_model()
+
+def detect_and_preprocess(image):
+    import cv2
+    from PIL import Image
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    img_cv = np.array(image)
+    gray = cv2.cvtColor(img_cv, cv2.COLOR_RGB2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+
+    if len(faces) == 0:
+        return preprocess_image(image)  # fallback: 전체 이미지 사용
+
+    x, y, w, h = faces[0]
+    face_img = img_cv[y:y+h, x:x+w]
+    face_pil = Image.fromarray(face_img)
+    return preprocess_image(face_pil)
+
 
 # 이미지 전처리 함수
 def preprocess_image(image):
@@ -74,7 +91,8 @@ if uploaded_file is not None: # - 파일이 업로드되었을 때
     st.image(image, caption="업로드된 이미지", width='stretch') # - use_container_width=True: 컨테이너 너비에 맞게 이미지 크기 조정
 
     try:
-        image_tensor = preprocess_image(image) # - 이미지 전처리
+        # image_tensor = preprocess_image(image) # - 이미지 전처리
+        image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor) # - 예측 수행
         label = labels_map[prediction]
 
@@ -100,7 +118,8 @@ if camera_image is not None:
     st.image(image, caption="촬영된 이미지", width='stretch')
 
     try:
-        image_tensor = preprocess_image(image)
+        # image_tensor = preprocess_image(image)
+        image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor)
         label = labels_map[prediction]
 
@@ -129,7 +148,8 @@ if uploaded_files:
         st.image(image, caption=uploaded_file.name, width='stretch')
 
         try:
-            image_tensor = preprocess_image(image)
+            # image_tensor = preprocess_image(image)
+            image_tensor = detect_and_preprocess(image) # - 이미지 전처리
             prediction, probabilities = predict(image_tensor)
             label = labels_map[prediction]
 

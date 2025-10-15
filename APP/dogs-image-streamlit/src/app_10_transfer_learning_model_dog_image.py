@@ -31,6 +31,22 @@ def load_model():
 model = load_model()
 
 # 이미지 전처리 함수
+def detect_and_preprocess(image):
+    import cv2
+    from PIL import Image
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    img_cv = np.array(image)
+    gray = cv2.cvtColor(img_cv, cv2.COLOR_RGB2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+
+    if len(faces) == 0:
+        return preprocess_image(image)  # fallback: 전체 이미지 사용
+
+    x, y, w, h = faces[0]
+    face_img = img_cv[y:y+h, x:x+w]
+    face_pil = Image.fromarray(face_img)
+    return preprocess_image(face_pil)
+
 def preprocess_image(image):
     transform = transforms.Compose([
         transforms.Resize((224, 224)), # 이미지 크기를 224×224로 조정 (ViT 입력 크기)
@@ -72,6 +88,7 @@ if uploaded_file is not None: # - 파일이 업로드되었을 때
 
     try:
         image_tensor = preprocess_image(image) # - 이미지 전처리
+        # image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor) # - 예측 수행
         label = labels_map[prediction]
 
@@ -96,7 +113,8 @@ if camera_image is not None:
     st.image(image, caption="촬영된 이미지", use_container_width=True)
 
     try:
-        image_tensor = preprocess_image(image)
+        image_tensor = preprocess_image(image) # - 이미지 전처리
+        # image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor)
         label = labels_map[prediction]
 
@@ -124,7 +142,8 @@ if uploaded_files:
         st.image(image, caption=uploaded_file.name, use_container_width=True)
 
         try:
-            image_tensor = preprocess_image(image)
+            image_tensor = preprocess_image(image) # - 이미지 전처리
+            # image_tensor = detect_and_preprocess(image) # - 이미지 전처리
             prediction, probabilities = predict(image_tensor)
             label = labels_map[prediction]
 

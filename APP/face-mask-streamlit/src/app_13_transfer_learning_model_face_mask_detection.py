@@ -20,7 +20,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def load_model():
     # base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
     base_model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT) # ResNet 모델을 사전학습 가중치로 불러옴.
-    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 마스크 착용 여부 4 클래스
+    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 마스크 착용 여부 2 클래스
 
     model_path = os.path.join("models", "model_transfer_learning_face_mask_detection.ckpt") # - 학습된 모델 가중치 로드
     if not os.path.exists(model_path):
@@ -33,7 +33,24 @@ def load_model():
 
 model = load_model()
 
-# 이미지 전처리 함수
+# 이미지 전처리 함수 - OpenCV를 이용해 이미지에서 얼굴을 자동으로 검출하고, 그 얼굴 영역만 잘라서 전처리하는 함수
+# 1) 이미지에서 얼굴을 찾는다 (OpenCV Haar Cascade), 2) 얼굴이 있으면 crop해서 전처리, 3) 얼굴이 없으면 전체 이미지를 전처리
+def detect_and_preprocess(image):
+    import cv2 # 얼굴 검출용
+    from PIL import Image # 이미지 포멧용
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') # OpenCV에서 제공하는 Haar Cascade 얼굴 검출기를 불러옴.
+    img_cv = np.array(image) # 넘파이 변환하여 OpenCV가 처리할 수 있도록 함.
+    gray = cv2.cvtColor(img_cv, cv2.COLOR_RGB2GRAY) # 얼굴 검출은 흑백 이미지에서 더 빠르고 정확하게 작동하므로, RGB 이미지를 그레이스케일로 변환
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4) # 얼굴 검출, 1.1(이미지 크기를 10%씩 줄여가며 탐색), 4(최소 4개의 이웃 사각형이 있어야 얼굴로 판단)
+
+    if len(faces) == 0:
+        return preprocess_image(image) # 얼굴이 하나도 검출되지 않으면, 전체 이미지를 그대로 전처리해서 반환(fallback: 전체 이미지 사용)
+
+    x, y, w, h = faces[0] # 첫 번째로 검출된 얼굴의 좌표를 가져옵니다. (여러 얼굴이 있을 경우 첫 번째만 사용)
+    face_img = img_cv[y:y+h, x:x+w] # 얼굴 영역만 잘라냅니다 (crop)
+    face_pil = Image.fromarray(face_img) # NumPy 배열을 다시 PIL 이미지로 변환, preprocess_image()는 PIL 이미지를 입력으로 받기 때문임.
+    return preprocess_image(face_pil)
+
 def preprocess_image(image):
     transform = transforms.Compose([
         transforms.Resize((224, 224)), # 이미지 크기를 224×224로 조정 (ViT 입력 크기)
@@ -74,7 +91,8 @@ if uploaded_file is not None: # - 파일이 업로드되었을 때
     st.image(image, caption="업로드된 이미지", width='stretch') # - use_container_width=True: 컨테이너 너비에 맞게 이미지 크기 조정
 
     try:
-        image_tensor = preprocess_image(image) # - 이미지 전처리
+        # image_tensor = preprocess_image(image) # - 이미지 전처리
+        image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor) # - 예측 수행
         label = labels_map[prediction]
 
@@ -100,7 +118,8 @@ if camera_image is not None:
     st.image(image, caption="촬영된 이미지", width='stretch')
 
     try:
-        image_tensor = preprocess_image(image)
+        # image_tensor = preprocess_image(image)
+        image_tensor = detect_and_preprocess(image) # - 이미지 전처리
         prediction, probabilities = predict(image_tensor)
         label = labels_map[prediction]
 
@@ -129,7 +148,8 @@ if uploaded_files:
         st.image(image, caption=uploaded_file.name, width='stretch')
 
         try:
-            image_tensor = preprocess_image(image)
+            # image_tensor = preprocess_image(image)
+            image_tensor = detect_and_preprocess(image) # - 이미지 전처리
             prediction, probabilities = predict(image_tensor)
             label = labels_map[prediction]
 

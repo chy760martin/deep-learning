@@ -46,7 +46,8 @@ class TransferLearningModel(nn.Module):
 def load_model(model_path, device): # model_path: 저장된 모델 경로, device: 'cpu' 또는 'cuda'
     # base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT)
     base_model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT) # ResNet 모델을 사전학습 가중치로 불러옴.
-    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=2).to(device)
+    num_classes=2
+    model = TransferLearningModel(base_model, feature_extractor=True, num_classes=num_classes).to(device)
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.eval()
     return model

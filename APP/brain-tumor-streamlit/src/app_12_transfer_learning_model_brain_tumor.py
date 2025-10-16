@@ -20,10 +20,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # 모델 로딩
 @st.cache_resource # - @st.cache_resource: 모델을 한 번만 로딩하고 캐시하여 앱 속도 향상
 def load_model():
-    base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
+    # base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
+    base_model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT) # ResNet 모델을 사전학습 가중치로 불러옴.
     model = TransferLearningModel(base_model, feature_extractor=True, num_classes=4).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=4: 강아지 4 클래스
 
-    model_path = os.path.join("models", "model_transfer_learning_brain_tumor_mri.ckpt") # - 학습된 모델 가중치 로드
+    model_path = os.path.join("models", "model_transfer_learning_brain_tumor_mri.pt") # - 학습된 모델 가중치 로드
     if not os.path.exists(model_path):
         st.error(f"모델 파일을 찾을 수 없습니다: {model_path}")
         st.stop()

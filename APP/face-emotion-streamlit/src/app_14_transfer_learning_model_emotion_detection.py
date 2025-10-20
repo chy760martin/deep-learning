@@ -5,7 +5,8 @@
 import streamlit as st
 import torch
 from torchvision import models, transforms
-from PIL import Image
+import cv2 # 얼굴 검출용
+from PIL import Image # 이미지 포멧용
 import numpy as np
 from model_utils import TransferLearningModel  # 현용님이 만든 클래스
 import os, json
@@ -32,12 +33,9 @@ def load_model():
     return model
 
 model = load_model()
-
 # 이미지 전처리 함수 - OpenCV를 이용해 이미지에서 얼굴을 자동으로 검출하고, 그 얼굴 영역만 잘라서 전처리하는 함수
 # 1) 이미지에서 얼굴을 찾는다 (OpenCV Haar Cascade), 2) 얼굴이 있으면 crop해서 전처리, 3) 얼굴이 없으면 전체 이미지를 전처리
 def detect_and_preprocess(image):
-    import cv2 # 얼굴 검출용
-    from PIL import Image # 이미지 포멧용
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') # OpenCV에서 제공하는 Haar Cascade 얼굴 검출기를 불러옴.
     img_cv = np.array(image) # 넘파이 변환하여 OpenCV가 처리할 수 있도록 함.
     gray = cv2.cvtColor(img_cv, cv2.COLOR_RGB2GRAY) # 얼굴 검출은 흑백 이미지에서 더 빠르고 정확하게 작동하므로, RGB 이미지를 그레이스케일로 변환
@@ -58,6 +56,55 @@ def preprocess_image(image):
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
     return transform(image).unsqueeze(0).to(device) # - unsqueeze(0): 배치 차원 추가 → [1, 3, 224, 224], 배치 차원 추가 및 디바이스로 이동
+
+# Grad-CAM 함수 - 모델, 입력 이미지 텐서, 예측 클래스 인덱스를 받아 heatmap을 생성
+# 빨간색 영역 - 모델이 가장 주목한 부분입니다. 이 영역이 예측에 가장 큰 영향을 미쳤으며, 모델이 이 부분을 통해 클래스를 결정했다고 볼 수 있습니다.
+# 노란색과 녹색 영역 - 이 부분도 예측에 기여했지만, 빨간색 영역보다는 덜 중요하게 작용했습니다.
+# 파란색 영역 - 모델이 상대적으로 덜 주목하거나 거의 주목하지 않은 부분입니다.
+# ResNet 모델, 전처리된 입력 이미지(shape:[1,3,224,224]), Grad-CAM을 적용할 대상 레이어(보통 마지막 convolution block), 예측된 클래스 인덱스(0~7)
+def grad_cam(model, image_tensor, target_layer, predicted_class):
+    gradients = []
+    activations = []
+    
+    def forward_hook(module, input, output): # 순전파 시 활성화값(feature map)을 저장
+        activations.append(output)
+    
+    def backward_hook(module, grad_input, grad_output): # 역전파 시 gradient를 저장
+        gradients.append(grad_output[0])
+    
+    # Hook 등록, 지정한 target_layer에 hook을 연결하여 forward/backward 시점에 데이터를 수집
+    target_layer.register_forward_hook(forward_hook)
+    target_layer.register_backward_hook(backward_hook)
+
+    # 순전파 및 역전파
+    model.zero_grad() # 미분 초기화
+    output = model(image_tensor) # 모델 예측
+
+    # output[0] 배치에서 첫번째 이미지 예측 결과, predicted_class: 예측된 클래스 인덱스 (예: 3 → happy)
+    # 따라서 output[0, predicted_class]는: 
+    # 모델이 해당 이미지에 대해 예측한 클래스의 점수만 하나 선택하는 것입니다.
+    # 예시: output[0, 3] = 3.1 → 모델이 "happy" 클래스에 대해 3.1이라는 점수를 줬다는 뜻
+    class_score = output[0, predicted_class]
+    class_score.backward() # 미분 연산, 예측된 클래스 하나만 선택하여 역전파 한다.
+
+    # Grad-CAM 계산
+    grads = gradients[0].cpu().detach().numpy()[0] # 텐서 -> 넘파이 변경
+    acts = activations[0].cpu().detach().numpy()[0]
+    weights = np.mean(grads, axis=(1, 2)) # 각 채널의 중요도 (gradient의 평균값)
+    # 최종적으로 각 위치의 중요도를 누적할 공간
+    cam = np.zeros(acts.shape[1:], dtype=np.float32) # acts.shape: [C, H, W] → 채널 수, 높이, 너비, acts.shape[1:]: [H, W] → 각 채널의 공간 크기
+
+    for i, w in enumerate(weights): # 각 채널의 feature map에 해당 채널의 중요도(weight)를 곱해서 누적
+        cam += w * acts[i]
+    
+    cam = np.maximum(cam, 0) # 음수 제거(음수는 중요하지 않다고 간주한다.)
+    cam = cv2.resize(cam, (224, 224)) # heatmap을 원본 이미지 크기와 맞춤
+    # 0~1 범위로 정규화
+    cam = cam - np.min(cam) # 가장 낮은 값 제거
+    cam = cam / np.max(cam) # 가장 높은 값으로 스케일링
+
+    return cam
+
 
 # 예측 함수
 def predict(image_tensor):
@@ -97,9 +144,25 @@ if uploaded_file is not None: # - 파일이 업로드되었을 때
         label = labels_map[prediction]
 
         st.success(f'예측 결과: **{label}**')
-
         st.subheader("예측 확률")
         st.bar_chart( {labels_map[i]: prob for i, prob in enumerate(probabilities)} )
+
+        # Grad-CAM 시각화 추가
+        target_layer = model.model.layer4[-1] # TransferLearningModel 클래스 내부의 ResNet18 마지막 Residual Block 지정
+        # 모델과 에측된 클래스에 대해 Grad-CAM heatmap을 생성
+        cam = grad_cam(model=model.model, image_tensor=image_tensor, target_layer=target_layer, predicted_class=prediction)
+
+        # 원본 이미지와 heatmap overlay
+        img_np = np.array(image.resize( (224, 224) )) / 255.0
+        heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET) # COLORMAP_JET은 빨강(높은 중요도), 파랑(낮은 중요도)으로 표현됨
+        heatmap = np.float32(heatmap) / 255
+        overlay = heatmap + img_np
+        overlay = overlay / np.max(overlay)
+        
+        st.subheader('Grad-CAM 시각화')
+        st.image(img_np, caption='원본 이미지', use_container_width=True)
+        st.image(overlay, caption='Grad-CAM Overlay', use_container_width=True)
+
     except Exception as e:
         st.error(f"예측 처리 중 오류가 발생했습니다: {e}")
 
@@ -120,6 +183,22 @@ if camera_image is not None:
 
         st.subheader("예측 확률")
         st.bar_chart({labels_map[i]: prob for i, prob in enumerate(probabilities)})
+
+        # Grad-CAM 시각화 추가
+        target_layer = model.model.layer4[-1] # ResNet18의 마지막 Residual Block
+        cam = grad_cam(model=model.model, image_tensor=image_tensor, target_layer=target_layer, predicted_class=prediction)
+
+        # 원본 이미지와 heatmap overlay
+        img_np = np.array(image.resize( (224, 224) )) / 255.0
+        heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET)
+        heatmap = np.float32(heatmap) / 255
+        overlay = heatmap + img_np
+        overlay = overlay / np.max(overlay)
+
+        st.subheader('Grad-CAM 시각화')
+        st.image(img_np, caption='원본 이미지', use_container_width=True)
+        st.image(overlay, caption='Grad-CAM Overlay', use_container_width=True)
+
     except Exception as e:
         st.error(f"웹캠 예측 처리 중 오류가 발생했습니다: {e}")
 
@@ -147,6 +226,22 @@ if uploaded_files:
                 "확률": f"{probabilities[prediction]:.4f}"
             })
             st.bar_chart({labels_map[i]: prob for i, prob in enumerate(probabilities)})
+
+            # Grad-CAM 시각화 추가
+            target_layer = model.model.layer4[-1] # ResNet18의 마지막 Residual Block
+            cam = grad_cam(model=model.model, image_tensor=image_tensor, target_layer=target_layer, predicted_class=prediction)
+
+            # 원본 이미지와 heatmap overlay
+            img_np = np.array(image.resize( (224, 224) )) / 255.0
+            heatmap = cv2.applyColorMap(np.uint8(255 * cam), cv2.COLORMAP_JET)
+            heatmap = np.float32(heatmap) / 255
+            overlay = heatmap + img_np
+            overlay = overlay / np.max(overlay)
+
+            st.subheader('Grad-CAM 시각화')
+            st.image(img_np, caption='원본 이미지', use_container_width=True)
+            st.image(overlay, caption='Grad-CAM Overlay', use_container_width=True)
+
         except Exception as e:
             st.error(f"예측 처리 중 오류가 발생했습니다: {e}")
     

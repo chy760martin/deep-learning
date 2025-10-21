@@ -23,7 +23,7 @@
 ### 15. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Kaggle COVID19 Detection - COVID19 감염 예측 이미지 데이터셋 사용
 > Model - 15_transfer_learning_kaggle_covid19_detection.ipynb
 > Streamlit 웹앱 기본 구조 
-> - covid19-detection-streamlit/src/.py
+> - covid19-detection-streamlit/src/app_15_transfer_learning_model_covid19_detection.py
 > - covid19-detection-streamlit/src/model_utils.py
 > - covid19-detection-streamlit/src/labels_map.json
 > - covid19-detection-streamlit/models/model_transfer_learning_covid19_detection.pt

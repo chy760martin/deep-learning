@@ -20,6 +20,21 @@
 <h2> Deep Learning </h2>
 
 ---
+### 17. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Surface Crack Detection - 콘크리트 표면 결함 예측 이미지 데이터셋 사용
+> Model - 17_transfer_learning_kaggle_surface_crack_detection.ipynb
+> Streamlit 웹앱 기본 구조 
+> - surface_crack-detection-streamlit/src/17_transfer_learning_kaggle_surface_crack_detection.py
+> - surface_crack-detection-streamlit/src/model_utils.py
+> - surface_crack-detection-streamlit/src/labels_map.json
+> - surface_crack-detection-streamlit/models/model_transfer_learning_surface_crack_detection.pt
+1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. Streamlit 앱 - 콘크리트 표면 결함 예측 이미지 분류 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 콘크리트 표면 결함 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+---
 ### 16. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Breast Ultrasound Detection - 유방암 예측 이미지 데이터셋 사용
 > Model - 16_transfer_learning_kaggle_breast_ultrasound_detection.ipynb
 > Streamlit 웹앱 기본 구조 
@@ -230,12 +245,7 @@
 project
     - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측
     - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
-    - Kaggle brain tumor Image Classification (MRI) - Kaggle 뇌종양(Brain Tumor) 이미지 분류, pre-trained model(mobilenet_v2) 적용
     - GTSRB (German Traffic Sign Recognition Benchmark) - 표지판(Traffic sign) 이미지 분류, CNN 모델 아키텍처 적용
-    - Kaggle Surface Crack Detection - 콘크리트 표면 결함 (Surface Crack Detection) 이미지 분류, CNN 모델 아키텍처 적용
-    - Kaggle COVID 19 Radiography - COVID 19 감염 예측, COVID(코로나)/Viral Pneumonia(바이러스성 폐럼)/Lung Opacity(폐 음영 - 폐렴,폐암,간질성 폐 질환 등 다양한 원인)/Normal(정상) 이미지 분류, pre-trained model(mobilenet_v2) 적용
-    - Kaggle Breast Ultrasound Image Classification - Kaggle Breast Ultrasound (유방초음파), normal(정상), benign(양성), malignant(악성) 예측 이미지 분류, pre-trained model(mobilenet_v2) 적용
-    - Kaggle Dog Breed Image Classification Dataset - Kaggle Dog Breed Image 은 개 품종 예측 이미지 분류
 LLM
     - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)
     - Transformers - 트랜스포머 허깅페이스(라이브러리)

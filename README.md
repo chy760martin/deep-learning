@@ -23,7 +23,7 @@
 ### 17. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Surface Crack Detection - 콘크리트 표면 결함 예측 이미지 데이터셋 사용
 > Model - 17_transfer_learning_kaggle_surface_crack_detection.ipynb
 > Streamlit 웹앱 기본 구조 
-> - surface_crack-detection-streamlit/src/17_transfer_learning_kaggle_surface_crack_detection.py
+> - surface_crack-detection-streamlit/src/app_17_transfer_learning_model_surface_crack_detection.py
 > - surface_crack-detection-streamlit/src/model_utils.py
 > - surface_crack-detection-streamlit/src/labels_map.json
 > - surface_crack-detection-streamlit/models/model_transfer_learning_surface_crack_detection.pt

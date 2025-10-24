@@ -20,6 +20,21 @@
 <h2> Deep Learning </h2>
 
 ---
+### 18. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : GTSRB (German Traffic Sign Recognition Benchmark) - 교통 표지판(Traffic sign) 이미지 분류 이미지 데이터셋 사용
+> Model - 18_transfer_learning_gtsrb_traffic_sign_detection.ipynb
+> Streamlit 웹앱 기본 구조 
+> - gtsrb-traffic-sign-detection-streamlit/src/app_18_transfer_learning_model_gtsrb_traffic_sign_detection.py
+> - gtsrb-traffic-sign-detection-streamlit/src/model_utils.py
+> - gtsrb-traffic-sign-detection-streamlit/src/labels_map.json
+> - gtsrb-traffic-sign-detection-streamlit/models/model_transfer_learning_gtsrb_traffic_detection.pt
+1. Transfer Learning 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. Streamlit 앱 - 교통 표지판(Traffic sign) 예측 이미지 분류 데모 - streamlit 라이브러리를 사용하여 웹 앱 형태로 구현, 사용자가 이미지를 업로드하면 모델이 교통 표지판(Traffic sign) 예측(단일 이미지 업로드, 웹캠 이미지, 멀티 이미지 업로드)
+---
 ### 17. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : Kaggle Surface Crack Detection - 콘크리트 표면 결함 예측 이미지 데이터셋 사용
 > Model - 17_transfer_learning_kaggle_surface_crack_detection.ipynb
 > Streamlit 웹앱 기본 구조 

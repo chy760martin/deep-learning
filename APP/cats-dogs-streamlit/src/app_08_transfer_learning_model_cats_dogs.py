@@ -27,7 +27,7 @@ import torch
 from torchvision import models, transforms
 from PIL import Image
 import numpy as np
-from model_utils import TransferLearningModel  # 현용님이 만든 클래스
+from model_utils import TransferLearningModel
 
 # 디바이스 설정
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

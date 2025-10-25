@@ -8,7 +8,7 @@ from torchvision import models, transforms
 import cv2 # 얼굴 검출용
 from PIL import Image # 이미지 포멧용
 import numpy as np
-from model_utils import TransferLearningModel  # 현용님이 만든 클래스
+from model_utils import TransferLearningModel
 import os, json
 import pandas as pd
 

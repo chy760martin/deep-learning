@@ -1,6 +1,6 @@
-# app_16_transfer_learning_model_breast_ultrasound_detection.py
-# Streamlit 앱 - Kaggle Breast Ultrasound Detection - 유방암 예측 이미지 분류
-# benign(양성), malignant(악성), normal(정상)
+# app_18_transfer_learning_model_gtsrb_traffic_sign_detection.py
+# Streamlit 앱 - GTSRB (German Traffic Sign Recognition Benchmark) - 교통 표지판(Traffic sign) 이미지 분류
+# '00000 ~ 00042'
 
 import streamlit as st
 import torch
@@ -20,10 +20,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def load_model():
     # base_model = models.vit_b_16(weights=models.ViT_B_16_Weights.DEFAULT) # - vit_b_16: Vision Transformer 사전학습 모델
     base_model = models.resnet50(weights=models.ResNet50_Weights.DEFAULT) # ResNet 모델을 사전학습 가중치로 불러옴.
-    num_classes=3
+    num_classes=43
     model = TransferLearningModel(base_model, feature_extractor=True, num_classes=num_classes).to(device) # - feature_extractor=True: 특징 추출기로 사용, num_classes=2: 마스크 착용 여부 2 클래스
 
-    model_path = os.path.join("models", "model_transfer_learning_breast_ultrasound_detection.pt") # - 학습된 모델 가중치 로드
+    model_path = os.path.join("models", "model_transfer_learning_gtsrb_traffic_detection.pt") # - 학습된 모델 가중치 로드
     if not os.path.exists(model_path):
         st.error(f"모델 파일을 찾을 수 없습니다: {model_path}")
         st.stop()
@@ -127,11 +127,11 @@ with open(labels_path, 'r') as f: # - labels_map.json 파일 열기
     labels_map = {int(k):v for k, v in json.load(f).items()} # - JSON 파일에서 딕셔너리로 로드, 키를 int로 변환
 
 # Streamlit UI
-st.title("유방암 예측 분류기") # - 앱 제목
-st.write("이미지를 업로드하면 유방암을 예측해줍니다!") # - 앱 설명
+st.title("교통 표지판(Traffic sign) 이미지 분류 예측 분류기") # - 앱 제목
+st.write("이미지를 업로드하면 교통 표지판을 예측해줍니다!") # - 앱 설명
 
 # 단일 이미지 업로드
-uploaded_file = st.file_uploader("이미지를 업로드하세요", type=["jpg", "jpeg", "png" ]) # - 파일 업로더
+uploaded_file = st.file_uploader("이미지를 업로드하세요", type=["jpg", "jpeg", "png", 'ppm']) # - 파일 업로더
 if uploaded_file is not None: # - 파일이 업로드되었을 때
     image = Image.open(uploaded_file).convert("RGB") # - 이미지를 RGB로 변환
     # st.image(image, caption="업로드된 이미지", use_column_width=True)
@@ -203,7 +203,7 @@ if camera_image is not None:
         st.error(f"웹캠 예측 처리 중 오류가 발생했습니다: {e}")
 
 # 다중 이미지 업로드 (옵션)
-uploaded_files = st.file_uploader("이미지를 여러 장 업로드하세요", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
+uploaded_files = st.file_uploader("이미지를 여러 장 업로드하세요", type=["jpg", "jpeg", "png", 'ppm'], accept_multiple_files=True)
 
 if uploaded_files:
     results = []  # 예측 결과 저장 리스트

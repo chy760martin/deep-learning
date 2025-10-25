@@ -5,14 +5,14 @@
         <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=OpenJDK&logoColor=white">
         <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
         <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jQuery&logoColor=white"/>
-        <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white">
         <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
-        <img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
-        <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+        <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white">
+        <img src="https://img.shields.io/badge/Anaconda-44A833?style=for-the-badge&logo=Anaconda&logoColor=white"/>
         <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
         <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"/>
         <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white">
-        <img src="https://img.shields.io/badge/Anaconda-44A833?style=for-the-badge&logo=Anaconda&logoColor=white"/>
+        <img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
+        <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
     <br>
 </div>
 
@@ -255,18 +255,3 @@
 6. 테스트 및 시각화
 7. 웹에서 MLP 이진 뷴류기 데모 - 사용자가 숫자를 입력하면 예측 결과가 바로 표시되고, 입력값에 해당하는 위치에 빨간 선이 그려진 예측 곡선이 함께 나타남, CSV 업로드를 통한 배치 예측 및 시각화, 예측 결과를 CSV 파일로 다운로드할 수 있도록 기능, 이렇게 하면 사용자가 업로드한 데이터에 대한 예측 결과를 저장하고 활용
 ---
-
-
-project
-    - Kaggle Pima Indians Diabetes Dataset - Kaggle 당뇨병 발병 예측
-    - Kaggle Titanic Dataset - Kaggle 타이타닉 생존자 예측
-    - GTSRB (German Traffic Sign Recognition Benchmark) - 표지판(Traffic sign) 이미지 분류, CNN 모델 아키텍처 적용
-LLM
-    - Transformers - 트랜스포머 아키텍처(임베딩, 어텐션, 정규화, 피드 포워드, 인코더, 디코더)
-    - Transformers - 트랜스포머 허깅페이스(라이브러리)
-    - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, 한국어 기사(연합뉴스 데이터셋) 제목을 바탕으로 기사의 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(klue/roberta-base) 적용
-    - Transformers - 트랜스포머 허깅페이스 허브에 모델 업로드, MRPC(Microsoft Research Paraphrase Corpus) 데이터셋 바탕으로 레이블(1:유사,0:비유사) 영어 문장 유사도 카테고리를 분류하는 텍스트 분류 및 추론, pre-trained model(bert-base-uncased) 적용
-    - Transformers - 기초적인 문장 데이터셋 적용하여 Small Language Model(SLLM) 구축 및 텍스트 생성
-    - Transformers - 트랜스포머 허깅페이스 데이터셋(WikiText-2)을 적용하여 영어 Small Language Model(SLLM) 구축 및 텍스트 생성
-    - Transformers - 트랜스포머 허깅페이스 데이터셋(ShareGPT-KO)을 적용하여 한글 Small Language Model(SLLM) 구축 및 텍스트 생성
-    - Transformers - 트랜스포머 데이터셋(ChatbotData)을 적용하여 한글 Small Language Model(SLLM) 구축 및 텍스트 생성

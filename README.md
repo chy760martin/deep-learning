@@ -20,6 +20,36 @@
 <h2> Deep Learning </h2>
 
 ---
+### 19. Deep Learning Hybrid(CNN + RNN) Model - MNIST 손글씨 이미지 데이터셋 사용
+> 하이브리드 구조 개념
+> - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.
+> - RNN (Recurrent Neural Network) 또는 LSTM/GRU: 시계열적 특성을 가진 데이터를 처리하거나 CNN이 추출한 특징을 시퀀스로 간주해 순차적으로 처리합니다.
+> ----------------------------------------------------------------------------------------------------------------------------------------
+>   항목                      CNN 단독 모델                                           CNN + RNN 하이브리드 모델
+> ----------------------------------------------------------------------------------------------------------------------------------------
+> 목적               공간적 특징 추출 및 분류                               공간 + 시간/순차적 특징 처리
+> 입력 데이터         단일 이미지                                           이미지 시퀀스, 영상, 시계열
+> 처리 방식           이미지->특징->분류                                    이미지->CNN특징->RNN시퀀스 처리
+> 구조               Conv->Pool->FC->Softmax                             Conv->Pool->RNN->FC->Softmax
+> 기억 능력           없음(독립적 처리)                                     있음(이전 정보 기억 가능)
+> 적용 분야           이미지 분류, 객체 탐지                                 영상 분석, 이미지 캡셔닝,OCR, 행동 예측
+> 예시               입력: 고양이 사진 1장                                  입력: 고양이가 움직이는 영상(프레임 시퀀스)
+>                    처리: CNN이 공간적 특징 추출->’고양이’로 분류            처리: 각 프레임 CNN처리->RNN이 시간 흐름 분석->’고양이 점프 중’으로 분류
+> ----------------------------------------------------------------------------------------------------------------------------------------
+> Model - 19_deep_learning_hybrid.ipynb
+> Streamlit 웹앱 기본 구조 
+> - hybrid-mnist-streamlit/src/app_19_deep_learning_model_hybrid_mnist.py
+> - hybrid-mnist-streamlit/src/model_utils.py
+> - hybrid-mnist-streamlit/src/labels_map.json
+> - hybrid-mnist-streamlit/models/model_hybrid_mnist.pt
+1. Deep Learning Hybrid(CNN + RNN) 모델을 기반으로 성능 평가 및 시각화 강화
+2. Dataset 및 DataLoader를 활용한 데이터 처리
+3. 하이퍼파라미터 튜닝(학습률, 은닉층 크기 등)
+4. 학습 및 평가 train, evaluate, test 함수 분리로 유지보수 용이, 정확도 및 손실 계산 방식 추가
+5. 모델 저장 및 불러오기
+6. 테스트 및 시각화
+7. 웹에서 MNIST 숫자 분류기 웹앱 데모 - 사용자 입력 방식(테스트셋에서 무작위 이미지 선택, 사용자가 직접 이미지 업로드, 사용자가 직접 그리기), 모델 추론(학습된 Hybrid(CNN + RNN) 모델 로딩 (torch.load), 이미지 전처리 후 예측 수행, 결과 시각화(예측 결과 출력 (정답 vs 예측), Confusion Matrix 및 오차 분석, 틀린 예측 샘플 시각화))
+---
 ### 18. Transfer Learning(전이학습) - Pre-Trained Model(사전학습모델) : GTSRB (German Traffic Sign Recognition Benchmark) - 교통 표지판(Traffic sign) 이미지 분류 이미지 데이터셋 사용
 > Model - 18_transfer_learning_gtsrb_traffic_sign_detection.ipynb
 > Streamlit 웹앱 기본 구조 

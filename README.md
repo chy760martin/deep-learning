@@ -20,6 +20,20 @@
 <h2> Deep Learning </h2>
 
 ---
+### 21. Deep Learning Hybrid(CNN + RNN) Image Captioning(CNN+RNN) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용
+> 하이브리드 구조 개념
+> - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.
+> - RNN (Recurrent Neural Network) 또는 LSTM/GRU: 시계열적 특성을 가진 데이터를 처리하거나 CNN이 추출한 특징을 시퀀스로 간주해 순차적으로 처리합니다.
+> Model - 21_hybrid_coco.ipynb
+1. 학습 목표 : 이미지 캡션 생성을 위한 CNN-RNN 하이브리드 모델을 통한 최종 문장생성
+2. CNN-RNN 하이브리드 이미지 캡셔닝 학습 팁
+3. 이미지 → CNN으로 특징 추출
+4. 캡션 → RNN으로 시퀀스 생성
+5. 학습 데이터셋: MS COCO 추천
+6. 손실 함수: nn.CrossEntropyLoss()
+7. 옵티마이저: torch.optim.Adam
+8. MS COCO 데이터셋은 이미지와 캡션이 포함되어 있음
+---
 ### 20. Deep Learning Hybrid(CNN + RNN) Model - EMNIST 손글씨 숫자 + 알파벳 이미지 데이터셋 사용
 > 하이브리드 구조 개념
 > - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.

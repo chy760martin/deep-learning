@@ -20,6 +20,17 @@
 <h2> Deep Learning </h2>
 
 ---
+### 22. Deep Learning Hybrid(CNN + Attention) Image Captioning(CNN+Attention) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용
+> 핵심 차이: "어디를 보고 말하는가?"
+> - 기존 모델은 이미지 전체를 한 번에 요약해서 디코더에 넘긴다(마치 사진을 한 번 보고 기억으로 문장을 만드는 느낌)
+> - Attention 모델은 문장을 생성할 때마다 이미지의 다른 위치를 다시 본다(마치 사진을 계속 보면서 "곰 얼굴", "잔디", "침대" 등 필요한 부분에 집중하는 느낌)
+1. 학습 목표 : 이미지 캡션 생성을 위한 CNN-Attention 하이브리드 모델 구현 목표
+2. Encoder : 이미지 → CNN으로 특징 추출 (ResNet-50 → [batch_size, 14×14, 2048] 공간 특징 유지)
+3. Decoder : 이미지 특징 → Attention으로 시퀀스 생성 (이미지의 각 위치에 대한 attention + 캡션 시퀀스)
+4. 문장 생성 방식 : 매 시점마다 이미지의 다른 위치에 집중하며 단어 생성
+5. 표현력 : 객체, 배경, 위치 등 세부 정보 및 자연스럽고 정확한 문장 생성 가능
+6. 시각화 : 각 단어가 이미지의 어느 부분을 보고 생성됐는지 시각화 가능 (attention map)
+---
 ### 21. Deep Learning Hybrid(CNN + RNN) Image Captioning(CNN+RNN) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용
 > 하이브리드 구조 개념
 > - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.

@@ -20,25 +20,25 @@
 <h2> Deep Learning </h2>
 
 ---
-### 23. Transformer Sentiment Analysis(긍정/부정) 분류 모델 - IMDB 리뷰 데이터셋 적용, 영어 영화 리뷰(긍정/부정)
-> 텍스트 감정 분류
+### 23. Transformer Sentiment Analysis(긍정/부정) 분류 모델 - IMDB 리뷰 데이터셋 적용, 영어 영화 리뷰(긍정/부정), Model - LLM/01_transformer(sentiment_analysis_imdb).ipynb
+> Transformer Sentiment Analysis(긍정/부정) 분류 모델
 > - 입력된 문장(리뷰, 댓글, 트윗 등)을 긍정(Positive) 또는 **부정(Negative)**으로 자동 분류하는 것.
 > - 예: "이 영화 정말 재미있었어요!" → 긍정, "스토리가 지루하고 너무 길었어요." → 부정
-> 언어 이해 능력 강화
-> - 모델이 문장의 어휘, 문맥, 뉘앙스를 파악해 감정을 올바르게 해석하도록 학습.
-> - 단순히 키워드만 보는 것이 아니라, 문맥적 의미까지 고려해야 함.
-> - "너무 무섭게 재미있었다" → 긍정
-> - "재미있긴 했지만 너무 길었다" → 혼합적 뉘앙스 → 최종적으로 부정으로 분류될 수 있음
-> 일반화 성능 확보
-> - 학습 데이터에만 맞추는 것이 아니라, 새로운 문장에서도 정확히 분류할 수 있어야 함.
-> - 즉, 과적합을 피하고 다양한 표현 방식을 이해하는 능력을 키우는 것.
-> 실제 활용 목표
-> - 영화 리뷰, 상품 후기, SNS 글 등에서 사용자 감정 자동 분석
-> - 기업 → 고객 만족도 분석
-> - 연구 → 사회적 여론 분석
-> - 서비스 → 추천 시스템 개선
+1. 언어 이해 능력 강화
+ - 모델이 문장의 어휘, 문맥, 뉘앙스를 파악해 감정을 올바르게 해석하도록 학습.
+ - 단순히 키워드만 보는 것이 아니라, 문맥적 의미까지 고려해야 함.
+ - "너무 무섭게 재미있었다" → 긍정
+ - "재미있긴 했지만 너무 길었다" → 혼합적 뉘앙스 → 최종적으로 부정으로 분류될 수 있음
+2. 일반화 성능 확보
+ - 학습 데이터에만 맞추는 것이 아니라, 새로운 문장에서도 정확히 분류할 수 있어야 함.
+ - 즉, 과적합을 피하고 다양한 표현 방식을 이해하는 능력을 키우는 것.
+3. 실제 활용 목표
+ - 영화 리뷰, 상품 후기, SNS 글 등에서 사용자 감정 자동 분석
+ - 기업 → 고객 만족도 분석
+ - 연구 → 사회적 여론 분석
+ - 서비스 → 추천 시스템 개선
 ---
-### 22. Deep Learning Hybrid(CNN + Attention) Image Captioning(CNN+Attention) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용
+### 22. Deep Learning Hybrid(CNN + Attention) Image Captioning(CNN+Attention) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용, Model - 22_hybrid_coco_attention.ipynb
 > 핵심 차이: "어디를 보고 말하는가?"
 > - 기존 모델은 이미지 전체를 한 번에 요약해서 디코더에 넘긴다(마치 사진을 한 번 보고 기억으로 문장을 만드는 느낌)
 > - Attention 모델은 문장을 생성할 때마다 이미지의 다른 위치를 다시 본다(마치 사진을 계속 보면서 "곰 얼굴", "잔디", "침대" 등 필요한 부분에 집중하는 느낌)
@@ -49,7 +49,7 @@
 5. 표현력 : 객체, 배경, 위치 등 세부 정보 및 자연스럽고 정확한 문장 생성 가능
 6. 시각화 : 각 단어가 이미지의 어느 부분을 보고 생성됐는지 시각화 가능 (attention map)
 ---
-### 21. Deep Learning Hybrid(CNN + RNN) Image Captioning(CNN+RNN) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용
+### 21. Deep Learning Hybrid(CNN + RNN) Image Captioning(CNN+RNN) 최종 문장생성 모델 - COCO 이미지 캡셔닝 데이터셋 사용, Model - 21_hybrid_coco.ipynb
 > 하이브리드 구조 개념
 > - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.
 > - RNN (Recurrent Neural Network) 또는 LSTM/GRU: 시계열적 특성을 가진 데이터를 처리하거나 CNN이 추출한 특징을 시퀀스로 간주해 순차적으로 처리합니다.
@@ -63,7 +63,7 @@
 7. 옵티마이저: torch.optim.Adam
 8. MS COCO 데이터셋은 이미지와 캡션이 포함되어 있음
 ---
-### 20. Deep Learning Hybrid(CNN + RNN) Model - EMNIST 손글씨 숫자 + 알파벳 이미지 데이터셋 사용
+### 20. Deep Learning Hybrid(CNN + RNN) Model - EMNIST 손글씨 숫자 + 알파벳 이미지 데이터셋 사용, Model - 20_deep_learning_hybrid_emnist.ipynb
 > 하이브리드 구조 개념
 > - CNN (Convolutional Neural Network): 이미지나 공간적 데이터를 처리하여 특징(feature)을 추출합니다.
 > - RNN (Recurrent Neural Network) 또는 LSTM/GRU: 시계열적 특성을 가진 데이터를 처리하거나 CNN이 추출한 특징을 시퀀스로 간주해 순차적으로 처리합니다.

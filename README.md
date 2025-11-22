@@ -20,6 +20,19 @@
 <h2> Deep Learning </h2>
 
 ---
+### 25. Transformer Sentiment Analysis(긍정/부정) 분류 모델 - Naver 영화 리뷰 데이터셋 적용, 다국어 영화 리뷰(긍정/부정), Model - LLM/03_transformer(sentiment_analysis_naver_xlm-roberta).ipynb
+> Transformer Sentiment Analysis(긍정/부정) 분류 모델
+> - 입력된 문장(리뷰, 댓글, 트윗 등)을 긍정(Positive) 또는 **부정(Negative)**으로 자동 분류하는 것.
+> - 예: "이 영화 정말 재미있었어요!" → 긍정, "스토리가 지루하고 너무 길었어요." → 부정
+1. 언어 이해 능력 강화
+ - 모델이 문장의 어휘, 문맥, 뉘앙스를 파악해 감정을 올바르게 해석하도록 학습.
+ - 단순히 키워드만 보는 것이 아니라, 문맥적 의미까지 고려해야 함.
+ - "너무 무섭게 재미있었다" → 긍정
+ - "재미있긴 했지만 너무 길었다" → 혼합적 뉘앙스 → 최종적으로 부정으로 분류될 수 있음
+2. 일반화 성능 확보
+ - 학습 데이터에만 맞추는 것이 아니라, 새로운 문장에서도 정확히 분류할 수 있어야 함.
+ - 즉, 과적합을 피하고 다양한 표현 방식을 이해하는 능력을 키우는 것.
+---
 ### 24. Transformer Sentiment Analysis(긍정/부정) 분류 모델 - Naver 영화 리뷰 데이터셋 적용, 한국어 영화 리뷰(긍정/부정), Model - LLM/02_transformer(sentiment_analysis_naver).ipynb
 > Transformer Sentiment Analysis(긍정/부정) 분류 모델
 > - 입력된 문장(리뷰, 댓글, 트윗 등)을 긍정(Positive) 또는 **부정(Negative)**으로 자동 분류하는 것.

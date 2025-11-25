@@ -20,6 +20,28 @@
 <h2> Deep Learning </h2>
 
 ---
+### 26. Transformer News Analysis(뉴스 카테고리) 분류 모델 - AG News 데이터셋 적용, 다국어 뉴스 카테고리 분류, Model - LLM/04_transformer(news_analysis_ag).ipynb
+> Transformer News Analysis(뉴스 카테고리) 분류 모델
+> - 입력된 문장을 뉴스 카테고리 분류(정치, 경제, 과학/기술, 스포츠)
+> - 뉴스 분류는 문서의 의미를 파악해 사전에 정의된 카테고리로 매핑하는 작업
+> 1. 학습 목표
+> - 성능 극대화
+> -> 다양한 Transformer 아키텍처(BERT, RoBERTa, ELECTRA 등) 비교
+> -> Macro F1, Accuracy, Recall 등 지표 최적화
+> - 일반화 능력 확보
+> -> 새로운 뉴스 데이터에도 잘 작동하도록 데이터 증강 및 정규화 적용
+> - 모델 이해
+> -> Attention 가중치 분석을 통해 어떤 단어·문맥이 분류에 중요한지 해석 가능성 확보
+> - 실험적 확장
+> -> 멀티레이블 분류(한 뉴스가 여러 카테고리에 속할 수 있음)
+> -> 다국어 뉴스 분류(한국어 + 영어)
+> 2. 동작 방식
+> - 텍스트 입력 → 토크나이저로 단어를 토큰화
+> - Transformer 인코더 → 문맥적 의미를 벡터로 변환
+> - 분류 레이어(Softmax) → 각 카테고리 확률 계산
+> - 출력 → 가장 높은 확률의 카테고리를 최종 결과로 반환
+
+---
 ### 25. Transformer Sentiment Analysis(긍정/부정) 분류 모델 - Naver 영화 리뷰 데이터셋 적용, 다국어 영화 리뷰(긍정/부정), Model - LLM/03_transformer(sentiment_analysis_naver_xlm-roberta).ipynb
 > Transformer Sentiment Analysis(긍정/부정) 분류 모델
 > - 입력된 문장(리뷰, 댓글, 트윗 등)을 긍정(Positive) 또는 **부정(Negative)**으로 자동 분류하는 것.

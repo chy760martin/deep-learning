@@ -20,6 +20,25 @@
 <h2> Deep Learning </h2>
 
 ---
+### 28. Transformer 다국어 기계 번역 모델 - Hugging Face 라이브러리 적용, AI HUB 방송 다국어 번역 데이터셋 적용, Model - LLM/06.transformer(translation_m2m100_418M).ipynb
+> Transformer 다국어 기계 번역 모델
+> - Hugging Face 라이브러리 적용
+> - AI HUB 방송 다국어 번역 데이터셋 적용
+> - 입력된 문장을 다국어 기계 번역 모델을 통한 영어->한국어, 한국어->번역
+> 1. 학습 목표
+> - 구조 최적화
+> -> AI HUB 방송 다국어 번역 데이터셋 전처리
+> -> 병렬 문장쌍 데이터셋 변환 전처리
+> -> 토크나이징 및 토크나이징 전처리
+> -> 베이스 모델 로드
+> -> LoRA(Low-Rank Adaptation) 설정, 특정 레이어에 작은 저차원 행렬(랭크 r)을 삽입해서 학습
+> -> LoRA(Low-Rank Adaptation) 모델, 메모리 효율성/빠른 학습/도메인 적용, base 모델에 여러 LoRA 모듈을 붙였다 떼었다 할 수 있음
+> -> 학습 args 설정
+> -> Trainer 정의
+> -> Trainer 실행
+> -> LoRA 적용된 모델 저장, LoRA모델/토크나이저
+> -> LoRA 적용된 모델 불러오기, 베이스모델/LoRA모델/토크나이저
+---
 ### 27. Transformer News Analysis(뉴스 카테고리) 분류 모델 - AI HUB 뉴스 기사 기계독해 데이터 셋 적용, 다국어 뉴스 카테고리 분류, Model - LLM/05_transformer(news_analysis_aihub_news).ipynb
 > Transformer News Analysis(뉴스 카테고리) 분류 모델
 > - 입력된 문장을 AI HUB 뉴스 기사 카테고리 분류(정치, 경제, 사회, 문화/문화생활, IT/과학, 스포츠)

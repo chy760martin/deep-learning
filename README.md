@@ -21,7 +21,7 @@
 
 ---
 ### 28. Transformer 다국어 기계 번역 모델 - Hugging Face 라이브러리 적용, AI HUB 방송 다국어 번역 데이터셋 적용, Model - LLM/06.transformer(translation_m2m100_418M).ipynb
-> Transformer 다국어 기계 번역 모델
+> Transformer 다국어 기계 번역 모델 & 파인 튜닝
 > - Hugging Face 라이브러리 적용
 > - AI HUB 방송 다국어 번역 데이터셋 적용
 > - 입력된 문장을 다국어 기계 번역 모델을 통한 영어->한국어, 한국어->번역

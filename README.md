@@ -39,7 +39,7 @@
 > - LoRA 적용된 모델 저장, LoRA모델/토크나이저
 > - LoRA 적용된 모델 불러오기, 베이스모델/LoRA모델/토크나이저
 ---
-### 28. Transformer 다국어 기계 번역 모델 - Hugging Face 라이브러리 적용, AI HUB 방송 다국어 번역 데이터셋 적용, Model - LLM/06.transformer(translation_m2m100_418M).ipynb
+### 28. Transformer 다국어 기계 번역 모델 - Hugging Face 라이브러리 적용, AI HUB 방송 다국어 번역 데이터셋 적용, Model - LLM/06.transformer(translation_broadcast).ipynb
 > Transformer 다국어 기계 번역 모델 & 파인 튜닝
 > - Hugging Face 라이브러리 적용
 > - AI HUB 방송 다국어 번역 데이터셋 적용

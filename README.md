@@ -20,6 +20,17 @@
 <h2> Deep Learning </h2>
 
 ---
+### 35. Transformer 다국어 기계 번역 모델 분류기 및 다국어 기계 번역 - Hugging Face 라이브러리 적용, AI Hub 금융 학술논문/공시정보/뉴스/규정/보고서 데이터셋 적용, Model - LLM/13.transformer(translation_with_finance_classification).ipynb
+> Transformer 다국어 기계 번역 모델 분류기 & 파인 튜닝
+> - Hugging Face 라이브러리 적용
+> - 입력된 문장을 다국어 기계 번역 모델 분류기을 통한 학술논문(0)/공시정보(1)/뉴스(2)/규정(3)/보고서(4) 분류
+> - 입력 문장의 언어 분류 -> 입력 문장에 해당하는 기계 번역 모델 분류 -> 입력 문장에 해당하는 기계 번역
+> 1. 학습 목표
+> - 구조 최적화 및 파이프라인 단순화
+> - AI HUB 금융 학술논문/공시정보/뉴스/규정/보고서 다국어 번역 데이터셋 학습 보강
+> - 토크나이징 및 토크나이징 전처리
+> - LoRA 적용된 모델 불러오기, 베이스모델/LoRA모델/토크나이저
+---
 ### 34. Transformer 다국어 기계 번역 모델 분류기 - Hugging Face 라이브러리 적용, AI Hub 금융 학술논문/공시정보/뉴스/규정/보고서 데이터셋 적용, Model - LLM/12.transformer(translation_finance_classification).ipynb
 > Transformer 다국어 기계 번역 모델 분류기 & 파인 튜닝
 > - Hugging Face 라이브러리 적용

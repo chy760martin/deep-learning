@@ -21,7 +21,7 @@
 
 ---
 ### 35. Transformer 다국어 기계 번역 모델 분류기 및 다국어 기계 번역 - Hugging Face 라이브러리 적용, AI Hub 금융 학술논문/공시정보/뉴스/규정/보고서 데이터셋 적용, Model - LLM/13.transformer(translation_with_finance_classification).ipynb
-> Transformer 다국어 기계 번역 모델 분류기 & 파인 튜닝
+> Transformer 다국어 기계 번역 모델 분류기 및 다국어 기계 번역
 > - Hugging Face 라이브러리 적용
 > - 입력된 문장을 다국어 기계 번역 모델 분류기을 통한 학술논문(0)/공시정보(1)/뉴스(2)/규정(3)/보고서(4) 분류
 > - 입력 문장의 언어 분류 -> 입력 문장에 해당하는 기계 번역 모델 분류 -> 입력 문장에 해당하는 기계 번역

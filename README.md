@@ -20,6 +20,24 @@
 <h2> Deep Learning </h2>
 
 ---
+### 37. Transformer 생성형 모델 & 파인 튜닝 - Hugging Face 라이브러리 적용, AI HUB 금융 분야 다국어 말뭉치 데이터셋 적용, Model - LLM/15.transformer_gpt-2.ipynb
+> Transformer 생성형 모델 & 파인 튜닝
+> - Hugging Face 라이브러리 적용
+> - 입력된 문장을 생성형 모델을 통한 문장 생성
+> 1. 학습 목표
+> - 구조 최적화 및 파이프라인 단순화
+> - AI HUB 금융 분야 다국어 말뭉치 데이터셋 적용
+> - 금융 학술논문 데이터셋 변환 전처리
+> - 토크나이징 및 토크나이징 전처리
+> - 베이스 모델 로드
+> - LoRA(Low-Rank Adaptation) 설정, 특정 레이어에 작은 저차원 행렬(랭크 r)을 삽입해서 학습
+> - LoRA(Low-Rank Adaptation) 모델, 메모리 효율성/빠른 학습/도메인 적용, base 모델에 여러 LoRA 모듈을 붙였다 떼었다 할 수 있음
+> - 학습 args 설정
+> - Trainer 정의
+> - Trainer 실행
+> - LoRA 적용된 모델 저장, LoRA모델/토크나이저
+> - LoRA 적용된 모델 불러오기, 베이스모델/LoRA모델/토크나이저
+---
 ### 36. Transformer 요약 모델 & 파인 튜닝 - Hugging Face 라이브러리 적용, AI HUB 요약문 및 레포트 뉴스(news) 데이터셋 적용, Model - LLM/14.transformer(summary_news).ipynb
 > Transformer 요약 모델 & 파인 튜닝
 > - Hugging Face 라이브러리 적용

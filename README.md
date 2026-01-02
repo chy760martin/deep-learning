@@ -20,7 +20,7 @@
 <h2> Deep Learning </h2>
 
 ---
-### 37. Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습, Model - LLM/16.transformer_word_embedding.ipynb
+### 38. Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습, Model - LLM/16.transformer_word_embedding.ipynb
 > Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습
 > 학습 목표 
 > - 각 단어마다 vocab 전체와 확률 비교 → 정답과 비교 → 손실 계산 → 파라미터 업데이트 → logits 생성이라는 흐름으로 학습

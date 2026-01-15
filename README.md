@@ -20,6 +20,25 @@
 <h2> Deep Learning </h2>
 
 ---
+### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
+> Transformer 구조 이해 및 모델 구축
+> 1. 학습 목표 
+> - 1) Encoder
+> - Scaled Dot-Product Attention
+> - Multi-Head Attention
+> - Transformer Encoder Block(Attention -> FFN -> Residual -> LayerNorm 구조)
+> - Positional Encoding
+> - Transformer Encoder
+> - 2) Decoder
+> - Masked Multi-Head Attention
+> - Cross Attention
+> - Transformer Decoder Block(Masked Attention -> Cross Attention -> Residual -> LayerNorm 구조)
+> - Positional Encoding
+> - Transformer Decoder
+> - 3) TransformerClassifier
+> - Transformer Classifier 감정 분류 모델(문장을 입력 받아 긍정/부정 감정 분류)
+
+---
 ### 38. Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습, Model - LLM/16.transformer_word_embedding.ipynb
 > Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습
 > 1. 학습 목표 

@@ -22,19 +22,19 @@
 ---
 ### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
 > Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델
-> 1. Encoder
+> 1. Encoder 모델 구축
 > - Scaled Dot-Product Attention
 > - Multi-Head Attention
 > - Transformer Encoder Block(Attention -> FFN -> Residual -> LayerNorm 구조)
 > - Positional Encoding
 > - Transformer Encoder
-> 2. Decoder
+> 2. Decoder 모델 구축
 > - Masked Multi-Head Attention
 > - Cross Attention
 > - Transformer Decoder Block(Masked Attention -> Cross Attention -> Residual -> LayerNorm 구조)
 > - Positional Encoding
 > - Transformer Decoder
-> 3. TransformerClassifier
+> 3. Transformer Classifier  모델 구축
 > - Transformer Classifier 감정 분류 모델(문장을 입력 받아 긍정/부정 감정 분류)
 
 ---

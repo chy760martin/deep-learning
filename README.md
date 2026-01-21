@@ -20,6 +20,24 @@
 <h2> Deep Learning </h2>
 
 ---
+### 40. Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델, Model - 18.transformer_classifier_sentiment.ipynb
+> Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델
+> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> - 1. 데이터 로드 & 확인
+> - 결측치 제거(None, "")
+> - 2. 토크나이저 적용
+> - Hugging Face DistilBertTokenizer 베이스 모델 사용
+> - 3. 데이터셋 -> DataLoader 변환
+> - DistilBertTokenizer 베이스 모델 토크나이저에서 DataLoader 로 바로 변환
+> - Hugging Face Pre-Trained Model에서는 Custom Dataset 필요 없음
+> - 4. 모델정의 & GPU설정 & 전이학습 & 본체 동결(Feature Extraction) + LoRA Fine-tuning 조합 & EarlyStopping 클래스 정의
+> - 전이 학습: DistilBertForSequenceClassification 베이스 모델(distilbert-base-uncased), num_labels=2 긍정/부정 2개 클래스
+> - 본체 동결: model.distilbert.parameters()는 사전학습된 본체(embedding + transformer 블록)의 모든 파라미터를 의미, 따라서 학습은 classifier 레이어(pre_classifier, classifier)만 진행된다
+> - LoRA: Attention의 q_lin, v_lin 레이어에서 LoRA가 768차원 → 8차원 축소 → 768차원 복원 과정을 거쳐 업데이트를 추가하는 구조
+> - EarlyStopping: - 과적합 방지 + 최적 모델 확보 + 자원 절약 + EarlyStopping 발동 시점에서 최적 모델 가중치를 자동 저장
+> - 5. 최적화 설정 & 학습 루프 & 검증 루프 EarlyStopping 클래스 적용
+> - 최적화 설정: autocast(속도 향상) GradScaler(안정적 학습) 적용
+---
 ### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
 > Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델
 > 1. Encoder 모델 구축
@@ -36,7 +54,6 @@
 > - Transformer Decoder
 > 3. Transformer Classifier  모델 구축
 > - Transformer Classifier 감정 분류 모델(문장을 입력 받아 긍정/부정 감정 분류)
-
 ---
 ### 38. Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습, Model - LLM/16.transformer_word_embedding.ipynb
 > Transformer 모델내에서 사용되는 워드 임베딩 처리 및 학습

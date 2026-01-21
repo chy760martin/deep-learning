@@ -22,7 +22,7 @@
 ---
 ### 40. Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델, Model - 18.transformer_classifier_sentiment.ipynb
 > Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델
-> <학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용>
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
 > 1. 데이터 로드 & 확인
 > - 결측치 제거(None, "")
 > 2. 토크나이저 적용

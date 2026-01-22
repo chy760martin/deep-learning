@@ -37,6 +37,11 @@
 > - EarlyStopping: - 과적합 방지 + 최적 모델 확보 + 자원 절약 + EarlyStopping 발동 시점에서 최적 모델 가중치를 자동 저장
 > 5. 최적화 설정 & 학습 루프 & 검증 루프 EarlyStopping 클래스 적용
 > - 최적화 설정: autocast(속도 향상) GradScaler(안정적 학습) 적용
+> 6. 최적 모델 로드: GPU 설정, 검증/추론 모드 적용
+> 7. 테스트 데이터 평가: 사이킷런 평가 지표 적용
+> - classification_report 정확도/정밀도/재현율/F1-socre 확인
+> - confusion_matrix 오분류 패턴 분석
+> 8. Confusion Matrix Heatmap: Confusion Matrix를 Heatmap 그래프로 시각화 적용, 테스트 데이터 평가 데이터를 활용
 ---
 ### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
 > Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델

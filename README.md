@@ -42,6 +42,13 @@
 > - classification_report 정확도/정밀도/재현율/F1-socre 확인
 > - confusion_matrix 오분류 패턴 분석
 > 8. Confusion Matrix Heatmap: Confusion Matrix를 Heatmap 그래프로 시각화 적용, 테스트 데이터 평가 데이터를 활용
+> 9. 추론 테스트
+> 10. FastAPI 추론 서비스
+> - /llm_app/transformer_classifier_sentiment_18_app.py
+> - FastAPI 구동: 터미널에서 구동, uvicorn transformer_classifier_sentiment_18_app:app --reload
+> - 윈도우 파워쉘: Invoke-RestMethod -Uri "http://127.0.0.1:8000/predict" -Method Post -ContentType "application/json" -Body '{"text":"I really love this movie, it was fantastic!"}'
+> - Postman app
+> - API 코드로 테스트: Python, Java...
 ---
 ### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
 > Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델

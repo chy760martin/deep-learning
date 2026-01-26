@@ -1,4 +1,9 @@
 # FastAPI 추론 서비스
+# - /llm_app/transformer_classifier_sentiment_18_app.py
+# - FastAPI 구동: 터미널에서 구동, uvicorn transformer_classifier_sentiment_18_app:app --reload
+# - 윈도우 파워쉘: Invoke-RestMethod -Uri "http://127.0.0.1:8000/predict" -Method Post -ContentType "application/json" -Body '{"text":"I really love this movie, it was fantastic!"}'
+# - Postman app
+# - API 코드로 테스트: Python, Java...
 
 from fastapi import FastAPI # REST API 서버 구축용 프레임워크
 from pydantic import BaseModel # 입력 데이터 검증 및 구조 정의
@@ -45,8 +50,12 @@ app = FastAPI()
 # - API 요청 시 JSON 데이터 구조 정의, 예시: {"text": "I love this movie!"}
 class TextInput(BaseModel):
     text: str
+# - 여러 문장 리스트
+class TextListInput(BaseModel):
+    texts: list[str]
 
 # 추론 함수 정의
+# - 단일 문장 추론
 def predict(text, tokenizer, model, device):
     inputs = tokenizer(
         text,
@@ -56,14 +65,39 @@ def predict(text, tokenizer, model, device):
     ).to(device)
 
     # 검증/추론시 미분 연산 하지 않음
-    with autocast(device_type='cuda', dtype=torch.float16): # AMP(autocast) 적용 → GPU에서 FP16 연산으로 속도 최적화
+    with autocast(device_type='cuda', dtype=torch.float16): # AMP(autocast) 적용 -> GPU에서 FP16 연산으로 속도 최적화
         outputs = model(**inputs)
         pred = outputs.logits.argmax(dim=-1).item()
-    return 'Positive' if pred == 1 else 'Negative'
+    return {'text': text, 'sentiment': 'Positive' if pred == 1 else 'Negative'}
+
+# - 여러 문장 리스트 추론
+def predict_list(texts, tokenizer, model, device):
+    results = []
+    for text in texts:
+        inputs = tokenizer(
+            text,
+            return_tensors='pt',
+            truncation=True,
+            padding=True
+        ).to(device)
+
+        # 검증/추론시 미분 연산 하지 않음
+        with torch.no_grad():
+            with autocast(device_type='cuda', dtype=torch.float16): # AMP(autocast) 적용 -> GPU에서 FP16 연산으로 속도 최적화
+                outputs = model(**inputs)
+                pred = outputs.logits.argmax(dim=-1).item()
+        results.append({'text': text, 'sentiment': 'Positive' if pred == 1 else 'Negative'})
+    return results
 
 # /predict 엔드포인트에 POST 요청 시 추론 수행
 # - 응답: JSON 형태 → {"sentiment": "Positive"}
 @app.post('/predict')
 def predict_sentiment(input: TextInput):
     result = predict(input.text, tokenizer, model, device)
-    return {'sentiment': result}
+    return {'results': result}
+
+# - 응답: JSON 형태 → [{"sentiment": "Positive"}]
+@app.post('/predict_batch')
+def predict_batch(input: TextListInput):
+    # 여러 문장 리스트 객체 사용 texts
+    return {'results': predict_list(input.texts, tokenizer, model, device)}

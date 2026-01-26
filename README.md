@@ -49,6 +49,8 @@
 > - 윈도우 파워쉘: Invoke-RestMethod -Uri "http://127.0.0.1:8000/predict" -Method Post -ContentType "application/json" -Body '{"text":"I really love this movie, it was fantastic!"}'
 > - Postman app
 > - API 코드로 테스트: Python, Java...
+> - 단일 문장 추론, http://127.0.0.1:8000/predict
+> - 여러 문장 추론, http://127.0.0.1:8000/predict_batch
 ---
 ### 39. Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델, Model - LLM/17.transformer_self_attention.ipynb
 > Transformer 구조 이해 및 모델 구축 - Transformer Classifier 감정 분류 모델

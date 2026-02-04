@@ -20,6 +20,32 @@
 <h2> Deep Learning </h2>
 
 ---
+### 41. Transformer 모델 구축 - Transformer News Summary 요약 모델, Model - LLM/19.transformer_summary_news.ipynb
+> Transformer 모델 구축 - Transformer News Summary 요약 모델
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> 1. 데이터셋 로드 및 json 파일 추출 
+> 2. JSON 파싱: 본문과 요약 추출 
+> 3. 데이터 전처리
+> 4. 토크나이저 적용 데이터셋 -> DataLoader 생성
+> - Hugging Face BartTokenizer 베이스 모델 사용
+> - collate_fn 적용
+> 5. 모델 정의
+> - Feature Extraction + LoRA Fine-tuning 조합
+> - Early Stopping 클래스 정의
+> 6. 학습 루프
+> - autocast(속도 향상) 적용, GradScaler(안정적 학습) 적용
+> 7. 테스트
+> 8. 최적 모델 로드
+> 9. 실제 요약 생성
+> 10. ROUGE의 주요 지표
+> 11. FastAPI 추론 서비스
+> - /llm_app/transformer_summary_news_19_app.py
+> - FastAPI 구동: 터미널에서 구동, uvicorn transformer_summary_news_19_app:app --reload
+> - 윈도우 파워쉘: Invoke-RestMethod -Uri "http://127.0.0.1:8000/summarize" -Method Post -ContentType "application/json" -Body '{"text":"I really love this movie, it was fantastic!"}'
+> - Postman app
+> - API 코드로 테스트: Python, Java...
+> - 문장 추론, http://127.0.0.1:8000/summarize
+---
 ### 40. Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델, Model - LLM/18.transformer_classifier_sentiment.ipynb
 > Transformer 모델 구축 - Transformer Sentiment Classifier 감정 분류 모델
 >> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용

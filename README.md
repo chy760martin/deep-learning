@@ -41,7 +41,6 @@
 > 11. FastAPI 추론 서비스
 > - /llm_app/transformer_summary_news_19_app.py
 > - FastAPI 구동: 터미널에서 구동, uvicorn transformer_summary_news_19_app:app --reload
-> - 윈도우 파워쉘: Invoke-RestMethod -Uri "http://127.0.0.1:8000/summarize" -Method Post -ContentType "application/json" -Body '{"text":"I really love this movie, it was fantastic!"}'
 > - Postman app
 > - API 코드로 테스트: Python, Java...
 > - 문장 추론, http://127.0.0.1:8000/summarize

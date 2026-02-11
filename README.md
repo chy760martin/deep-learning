@@ -21,29 +21,30 @@
 
 ---
 ### 42. Transformer 모델 구축 - Transformer 질의응답(QA) 모델, Model - LLM/20.transformer_qa.ipynb
-# 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
-> - 1. QA Pre-trained 모델 선별 테스트, 
-> - 2. 데이터셋 로드 및 데이터 분리
-> - 3. 토크나이저, 데이터셋, 전처리 적용
+> Transformer 모델 구축 - Transformer 질의응답(QA) 모델
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> 1. QA Pre-trained 모델 선별 테스트, 
+> 2. 데이터셋 로드 및 데이터 분리
+> 3. 토크나이저, 데이터셋, 전처리 적용
 > - 전처리 함수: 질문 + 문맥 토큰화 + 정답 스팬(offsets 위치 정보: offset_mapping 구조 생성)매핑
 > - 데이터셋 적용, batched=True
-> - 4. collate_fn 정의 및 DataLoader 생성
+> 4. collate_fn 정의 및 DataLoader 생성
 > - collate_fn: 데이터로더 batch 데이터->텐서->스택 쌓아 리턴
 > - DataLoader 생성
-> - 5. 모델 정의
+> 5. 모델 정의
 > - Feature Extraction + LoRA Fine-tuning 조합
 > - 최적화 설정: optimizer, GradScaler, autocast
 > - Early Stopping 클래스 정의
 > - 최적 모델 가중치 저장
-> - 6. 학습/검증 루프
+> 6. 학습/검증 루프
 > - 딕셔너리 형태 학습데이터를 그대로 모델에 전달하는 코드로 정리, 코드가 깔끔하고 범용적으로 사용한다
 > - Early Stopping 객체 사용하여 적용
-> - 7. 전체 평가 파이프라인
+> 7. 전체 평가 파이프라인
 > - F1/EM 평가
-> - 8. 추론 단일 테스트
-> - 9. 추론 다중 테스트
-> - 10. 문장 추론: Fast API 호출
-> - 11. FastAPI 추론 서비스
+> 8. 추론 단일 테스트
+> 9. 추론 다중 테스트
+> 10. 문장 추론: Fast API 호출
+> 11. FastAPI 추론 서비스
 > - /llm_app/transformer_qa_19_app.py
 > - FastAPI 구동: 터미널에서 구동, uvicorn transformer_qa_20_app:app --reload
 > - Postman app

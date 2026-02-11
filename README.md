@@ -45,7 +45,7 @@
 > 9. 추론 다중 테스트
 > 10. 문장 추론: Fast API 호출
 > 11. FastAPI 추론 서비스
-> - /llm_app/transformer_qa_19_app.py
+> - /llm_app/transformer_qa_20_app.py
 > - FastAPI 구동: 터미널에서 구동, uvicorn transformer_qa_20_app:app --reload
 > - Postman app
 > - API 코드로 테스트: Python, Java...

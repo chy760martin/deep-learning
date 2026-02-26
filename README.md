@@ -20,6 +20,45 @@
 <h2> Deep Learning </h2>
 
 ---
+### 43. Transformer 모델 구축 - Transformer 대화형 챗봇(Dialogue Chatbot) 모델, Model - LLM/21.transformer_dialogue_chatbot.ipynb
+> Transformer 대화형 챗봇(Dialogue Chatbot) 모델
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> 1. 모델 분석
+> - Shape 변화 과정
+> 2. 데이터셋 로드 및 데이터 분리
+> - AI Hub 대화데이터: 한국어 SNS 멀티턴 대화 데이터
+> - 데이터 분리: train, validation
+> - 정상 파일 추출
+> 3. JSON 파일 직접 파싱
+> 4. 사전 토크나이징 및 저장
+> 5. Dataset 클래스 정의
+> 6. 사전 토크나이징 불러오기(이전대화/현재대화) 및 DataLoader 생성
+> 7. 모델 정의
+> - Feature Extraction + LoRA Fine-tuning 조합
+> - 최적화 설정: optimizer, GradScaler, autocast
+> - Early Stopping 클래스 정의
+> - 최적 모델 가중치 저장
+> 8. 학습/검증 루프
+> - 딕셔너리 형태 학습데이터를 그대로 모델에 전달하는 코드로 정리, 코드가 깔끔하고 범용적으로 사용한다
+> - Early Stopping 객체 사용하여 적용
+> - AMP torch.float32 사용(메모리 사용 증가, torch.float16 사용시 loss가 너무 작아저 nan 발생)
+> 9. 모델 정의 및 최적화 모델 로드
+> 10. 멀티 답변 생성
+> 11. FastAPI 추론 서비스
+> - /llm_app/transformer_dialogue_chatbot_21_app.py
+> - FastAPI 구동: 터미널에서 구동, uvicorn transformer_dialogue_chatbot_21_app:app --reload
+> - Postman app
+> - API 코드로 테스트: Python, Java...
+> - 문장 추론, http://127.0.0.1:8000/predict
+> 12. 추가 검토 사항
+> - 실제 서비스는 히스토리 관리(session_id + 최근 5회 대화 + 배열로 관리) + 요약 모델 + 검색을 병행
+> - 최근 대화만 유지, 가장 최근 N턴만 남기고 오래된 대화는 버린다, 예: 최근 5~10턴만 유지
+> - 대화 요약(Summarization), 오래된 대화를 요약해서 짧게 기록한다, 예: “사용자는 여행 관련 질문을 자주 한다” 같은 요약을 남겨두고, 세부 내용은 삭제.
+> - 메모리 DB 활용, 장기 기억은 벡터 데이터베이스(Vector Store)에 저장해두고, 필요할 때 검색해서 모델 입력에 포함합니다.
+> - 예: “서울 관광지” 관련 질문이 나오면, 벡터 DB에서 관련 대화 기록을 찾아서 모델에 전달.
+> - 하이브리드 전략, 최근 대화는 그대로 유지 + 오래된 대화는 요약/검색으로 관리
+
+---
 ### 42. Transformer 모델 구축 - Transformer 질의응답(QA) 모델, Model - LLM/20.transformer_qa.ipynb
 > Transformer 모델 구축 - Transformer 질의응답(QA) 모델
 >> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용

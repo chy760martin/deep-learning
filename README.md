@@ -20,6 +20,20 @@
 <h2> Deep Learning </h2>
 
 ---
+### 44. Transformer 모델 구축 - Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용), Model - LLM/22.transformer_rag.ipynb
+> Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용)
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> - 1. FAISS 메모리 기반 검색엔진 구축
+> - FAISS 메모리 기반 검색엔진 구축: faiss(단일 머신 메모리 기반, 10건 미만의 소규모 적합)
+> - 2. QA 토크나이저 + QA 모델
+> - 모델: monologg/koelectra-base-v3-finetuned-korquad
+> - 검토: 특정 도메인으로 파인튜닝된 QA 모델로 교체 검토
+> - 3. 요약 토크나이저 + 요약 모델
+> - 모델: gogamza/kobart-summarization
+> - 검토: 토크나이저는 PreTrainedTokenizerFast(한글 사용시), 특정 도메인으로 파인튜닝된 요약 모델로 교체 검토
+> - 4. LLM 토크나이저 + LLM 모델
+> - 검토: 현재 로컬 GPU 장비로는 생성형 LLM 모델을 도메인에 맞추어 파인튜닝은 어렵고, 추론까지 가능
+---
 ### 43. Transformer 모델 구축 - Transformer 대화형 챗봇(Dialogue Chatbot) 모델, Model - LLM/21.transformer_dialogue_chatbot.ipynb
 > Transformer 대화형 챗봇(Dialogue Chatbot) 모델
 >> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용

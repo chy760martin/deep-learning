@@ -20,6 +20,50 @@
 <h2> Deep Learning </h2>
 
 ---
+### 45. Transformer 모델 구축 - Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(Qdrant 의미 기반 검색엔진 적용), Model - LLM/23.transformer_rag2.ipynb
+> Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(Qdrant 의미 기반 검색엔진 적용)
+>> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용
+> 1. 데이터 수집 및 저장
+> - 수집 데이터 -> PostgreSQL 테이블 생성 및 입력
+> - DB 조회 + 로깅 설정으로 데이터 관리
+> 2. Qdrant 의미 기반 검색 구축
+> - Qdrant 구축 + 뉴스 컬렉션 생성
+> - Qdrant 검색엔진 서버 실행(qdrant.exe): .\LLM\qdrant\qdrant.exe
+> - https://github.com/qdrant/qdrant/releases 공식사이트: qdrant-x86_64-pc-windows-msvc.zip, 압축해제 qdrant.exe 실행
+> - API(curl) 테스트: http://localhost:6333/collections, curl http://localhost:6333/collections
+> 3. 임베딩 생성 후 Qdrant Collection에 Insert/Update
+> - 임베딩 모델 로드: 온라인, 오프라인 사용
+> - 컬렉션에 데이터 삽입: Batch 단위로 Qdrant의 update/insert
+> 4. Qdrant 의미 기반 검색
+> - 의미 기반 검색으로 관련 문서 조회
+> 5. QA 처리
+> - Qdrant 검색 결과 -> QA 토크나이저 + QA 모델
+> - 형태소 분석으로 한국어 처리 강화
+> - 문자열 -> 토큰 ID 변환, 예시: "AI는 의료 분야에서 활용된다." -> [101, 1234, 5678, ...]
+> - 모델 입력: input_ids 토큰 ID 배열, attention_mask 패딩 여부 표시, 모델 출력을 텍스트로 복원 [101, 1234, 5678, ...] -> "AI는 의료 분야에서 활용된다."
+> 6. 요약 처리
+> - 요약 토크나이저 + 요약 모델 (KoBART 기반)
+> - 반복 억제, 길이 조절, 다양성 확보 등 파라미터 튜닝
+> - 후처리(clean_summary)로 중복 제거
+> - from transformers import BartTokenizer # 영어 전용이라 맞지 않음
+> 7. 최종 응답: 외부 서비스 연계 검토
+> - Local LLM은 GPU 장비 한계로 로컬 실행은 패스 -> 대신 Copilot에 문의하여 자연스러운 답변 재구성
+> - 검토: 현재 로컬 GPU 장비로는 생성형 LLM 모델을 도메인에 맞추어 파인튜닝은 불가능, 현재 추론 모델도 좋은 성능의 모델로 교체 불가능
+> 8. 서비스: 구글, 네이버 RAG 시스템 구성
+> - /llm_app/transformer_rag2_23_app.py
+> - FastAPI 구동 정보: 터미널에서 구동, uvicorn transformer_rag2_23_app:app --reload, 경로 포함 uvicorn LLM.llm_app.transformer_rag2_23_app:app --reload
+> - FastAPI 서비스: /search, 입력: 질의문, 출력: QA + 요약 결과 + 출처 정보
+> - 1)  [사용자 질의]
+> - 2)  [FastAPI 엔드포인트: /search]
+> - 3)  [SentenceTransformer: 임베딩]
+> - 4)  [Qdrant 의미 기반 검색]
+> - 5)  [검색 결과 문서]
+> - 6)  [KoELECTRA QA 모델 + MeCab 후처리(형태소 분석: 한국어 처리 강황)]
+> - 7)  [KoBART Summarization 모델 + clean_summary]
+> - 8)  [응답 + 출처 표시]
+> - 9)  [최종 응답 LLM 모델은  외부 서비스 연계 검토: 자연스러운 문장]
+> - 10) [최종 사용자 응답]
+---
 ### 44. Transformer 모델 구축 - Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용), Model - LLM/22.transformer_rag.ipynb
 > Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용)
 >> 학습 목표 - 실무에서 사용되는 파이프라인 이해 및 적용

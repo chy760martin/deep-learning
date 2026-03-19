@@ -53,16 +53,16 @@
 > - /llm_app/transformer_rag2_23_app.py
 > - FastAPI 구동 정보: 터미널에서 구동, uvicorn transformer_rag2_23_app:app --reload, 경로 포함 uvicorn LLM.llm_app.transformer_rag2_23_app:app --reload
 > - FastAPI 서비스: /search, 입력: 질의문, 출력: QA + 요약 결과 + 출처 정보
-> - 1)  [사용자 질의]
-> - 2)  [FastAPI 엔드포인트: /search]
-> - 3)  [SentenceTransformer: 임베딩]
-> - 4)  [Qdrant 의미 기반 검색]
-> - 5)  [검색 결과 문서]
-> - 6)  [KoELECTRA QA 모델 + MeCab 후처리(형태소 분석: 한국어 처리 강황)]
-> - 7)  [KoBART Summarization 모델 + clean_summary]
-> - 8)  [응답 + 출처 표시]
-> - 9)  [최종 응답 LLM 모델은  외부 서비스 연계 검토: 자연스러운 문장]
-> - 10) [최종 사용자 응답]
+> - 1  [사용자 질의]
+> - 2  [FastAPI 엔드포인트: /search]
+> - 3  [SentenceTransformer: 임베딩]
+> - 4  [Qdrant 의미 기반 검색]
+> - 5  [검색 결과 문서]
+> - 6  [KoELECTRA QA 모델 + MeCab 후처리(형태소 분석: 한국어 처리 강화)]
+> - 7  [KoBART Summarization 모델 + clean_summary]
+> - 8  [응답 + 출처 표시]
+> - 9  [최종 응답 LLM 모델은  외부 서비스 연계 검토: 자연스러운 문장]
+> - 10 [최종 사용자 응답]
 ---
 ### 44. Transformer 모델 구축 - Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용), Model - LLM/22.transformer_rag.ipynb
 > Transformer RAG(Retriever Augmentation Generation) 구성 및 모델 파이프라인 구축(FAISS 메모리 기반 검색엔진 적용)

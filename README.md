@@ -48,7 +48,7 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
      - 엔드포인트: `/search`  
      - 출력: QA + 요약 결과 + 출처 정보  
 
-flowchart TD
+```flowchart TD
     A[사용자 질의] --> B[FastAPI 엔드포인트 /search]
     B --> C[SentenceTransformer 임베딩 생성]
     C --> D[Qdrant 의미 기반 검색]

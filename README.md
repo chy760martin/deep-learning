@@ -9,8 +9,6 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
 <div align="center">
     <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
     <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=OpenJDK&logoColor=white">
-    <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
-    <img src="https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jQuery&logoColor=white"/>
     <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
     <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white">
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/>
@@ -50,7 +48,6 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
      - 엔드포인트: `/search`  
      - 출력: QA + 요약 결과 + 출처 정보  
 
-```mermaid
 flowchart TD
     A[사용자 질의] --> B[FastAPI 엔드포인트 /search]
     B --> C[SentenceTransformer 임베딩 생성]

@@ -59,6 +59,7 @@ flowchart TD
     G --> H[응답 + 출처 표시]
     H --> I[외부 LLM 서비스 연계 검토]
     I --> J[최종 사용자 응답]
+```
 
 ### 44. Transformer RAG (FAISS 기반)
 - **파일**: `LLM/22.transformer_rag.ipynb`

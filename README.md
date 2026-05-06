@@ -57,6 +57,7 @@ flowchart TD
     C --> D[Linear Layer]
     D --> E[Softmax]
     E --> F[다음 단어 확률 분포]
+```
 
 ### 45. Transformer RAG (Qdrant 기반)
 - **파일**: `LLM/23.transformer_rag2.ipynb`, `LLM/llm_app/transformer_rag2_23_app.py`

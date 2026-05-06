@@ -27,7 +27,7 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
      - 입력 벡터를 선형 변환
   2. **MLP 2계층**  
      - 구조: Linear → ReLU → Linear  
-     - 공식: \(h = \max(0, xW_1+b_1), \; y = hW_2+b_2\)
+     - 공식: \(h = \max(0, xW_1+b_1), y = hW_2+b_2\)
   3. **MLP 3계층**  
      - 구조: Linear → ReLU → Linear → ReLU → Linear  
      - 단계별 활성화와 선형 변환

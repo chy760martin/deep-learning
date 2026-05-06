@@ -18,6 +18,46 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
 
 ## 📂 학습 프로젝트
 
+### 46. Transformer Mathematical Models
+- **폴더**: [LLM/mathematical-models](https://github.com/chy760martin/deep-learning/tree/main/LLM/mathematical-models)
+- **학습 목표**: 트랜스포머 모델의 핵심 수학적 구조와 단계별 계산 흐름 이해
+- **구성 요소**: Linear Layer, MLP, Encoder, Decoder, 최종 Linear, Softmax
+  1. **Linear Layer**  
+     - 공식: \(y = xW + b\)  
+     - 입력 벡터를 선형 변환
+  2. **MLP 2계층**  
+     - 구조: Linear → ReLU → Linear  
+     - 공식: \(h = \max(0, xW_1+b_1), \; y = hW_2+b_2\)
+  3. **MLP 3계층**  
+     - 구조: Linear → ReLU → Linear → ReLU → Linear  
+     - 단계별 활성화와 선형 변환
+  4. **Transformer Encoder**
+     - 입력(단어토큰) -> 입력 임베딩 + 위치 인코딩
+     - Multi-Head Attention
+     - Residual Connection + Layer Normalization
+     - FFN(Feed Forward Network)
+     - 2차 Residual Connection + Layer Normalization
+  5. **Transformer Decoder**
+     - 출력(Target) -> 출력 임베딩 + 위치 인코딩
+     - Masked Multi-Head Attention
+     - Residual Connection + Layer Normalization
+     - Cross-Attention (인코더 + 디코더 출력 결합)
+     - 2차 Residual Connection + Layer Normalization
+     - FFN(Feed Forward Network)
+     - 3차 Residual Connection + Layer Normalization
+  6. **최종 Linear Layer**  
+     - 디코더 출력 → 어휘 공간 매핑
+  7. **최종 Softmax**  
+     - 점수 벡터 → 확률 분포 변환
+
+```mermaid
+flowchart TD
+    A[입력 토큰] --> B[Encoder]
+    B --> C[Decoder]
+    C --> D[Linear Layer]
+    D --> E[Softmax]
+    E --> F[다음 단어 확률 분포]
+
 ### 45. Transformer RAG (Qdrant 기반)
 - **파일**: `LLM/23.transformer_rag2.ipynb`, `LLM/llm_app/transformer_rag2_23_app.py`
 - **학습 목표**: 실무형 RAG 파이프라인 이해 및 적용

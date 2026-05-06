@@ -21,9 +21,9 @@ MLP, CNN, RNN, LSTM, GRU 같은 기본 신경망부터 LLM 응용, Transformer R
 ### 46. Transformer Mathematical Models
 - **폴더**: [LLM/mathematical-models](https://github.com/chy760martin/deep-learning/tree/main/LLM/mathematical-models)
 - **학습 목표**: 트랜스포머 모델의 핵심 수학적 구조와 단계별 계산 흐름 이해
-- **구성 요소**: Linear Layer, MLP, Encoder, Decoder, 최종 Linear, Softmax
+- **구성 요소**: Linear Layer, MLP, Transformer Encoder, Transformer Decoder, 최종 Linear, Softmax
   1. **Linear Layer**  
-     - 공식: \(y = xW + b\)  
+     - 공식: $ \(y = xW + b\) $
      - 입력 벡터를 선형 변환
   2. **MLP 2계층**  
      - 구조: Linear → ReLU → Linear  
@@ -89,7 +89,7 @@ flowchart TD
      - 엔드포인트: `/search`  
      - 출력: QA + 요약 결과 + 출처 정보  
 
-```
+```mermaid
 flowchart TD
     A[사용자 질의] --> B[FastAPI 엔드포인트 /search]
     B --> C[SentenceTransformer 임베딩 생성]

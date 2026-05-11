@@ -81,8 +81,8 @@ flowchart TD
   venv\Scripts\activate      # Windows
 
 2. 필수 라이브러리 설치
+- requirements.txt
    ```bash
-   requirements.txt
    feedparser
    bs4
    datetime
@@ -97,6 +97,8 @@ flowchart TD
    numpy
    pandas
 
+- 라이브러리 설치
+   ```bash
    pip install -r requirements.txt
    
 

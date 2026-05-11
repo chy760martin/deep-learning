@@ -119,7 +119,7 @@ flowchart TD
    uvicorn LLM.llm_app.transformer_rag3_24_app:app --reload
    엔드포인트: /search
 
--- **구성 요소**:
+#### **구성 요소**:
 1. 데이터 수집 및 저장
 	◦ PostgreSQL 테이블 생성 및 입력
 	◦ DB 조회 + 로깅 설정으로 데이터 관리

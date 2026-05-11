@@ -71,7 +71,6 @@ flowchart TD
 - PostgreSQL + Qdrant + SentenceTransformer 기반 검색 시스템 구축
 
 #### **설치 및 실행 방법**
-
 1. 환경 준비
 - Python 3.9 이상 설치
 - 가상환경 생성 및 활성화:
@@ -79,7 +78,6 @@ flowchart TD
   python -m venv venv
   source venv/bin/activate   # Mac/Linux
   venv\Scripts\activate      # Windows
-
 2. 필수 라이브러리 설치
 - requirements.txt
    ```bash
@@ -96,12 +94,9 @@ flowchart TD
    torch
    numpy
    pandas
-
 - 라이브러리 설치
    ```bash
    pip install -r requirements.txt
-   
-
 3. PostgreSQL 설정
    ```bash
    CREATE DATABASE newsdb;
@@ -116,12 +111,10 @@ flowchart TD
       published_at TIMESTAMP,
       source_name TEXT
    );
-
 4. Qdrant 실행
    ```bash
    ./LLM/qdrant/qdrant.exe
    curl http://localhost:6333/collections
-
 5. FastAPI 서비스 실행
    ```bash
    uvicorn LLM.llm_app.transformer_rag3_24_app:app --reload
@@ -148,7 +141,6 @@ flowchart TD
 6. 서비스 구성
 	- FastAPI 실행 및 /search 엔드포인트 제공
 	- 출력: QA + 요약 결과 + 출처 정보
-
 ```mermaid
 flowchart TD
     A[사용자 질의] --> B[FastAPI 엔드포인트 /search]

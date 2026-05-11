@@ -62,15 +62,15 @@ flowchart TD
 ### 45. Transformer RAG (Qdrant 기반)
 한국어 뉴스 데이터를 PostgreSQL에 저장하고, Qdrant를 활용해 의미 기반 검색을 수행하는 RAG 파이프라인 프로젝트입니다.
 
-- **프로젝트 파일**
+#### **프로젝트 파일**
 - Notebook: `LLM/24.transformer_rag3.ipynb`
 - App 코드: `LLM/llm_app/transformer_rag3_24_app.py`
 
-- **학습 목표**
+#### **학습 목표**
 - 실무형 RAG 파이프라인 이해 및 적용
 - PostgreSQL + Qdrant + SentenceTransformer 기반 검색 시스템 구축
 
-- **설치 및 실행 방법**
+#### **설치 및 실행 방법**
 
 1. 환경 준비
 - Python 3.9 이상 설치
@@ -81,9 +81,9 @@ flowchart TD
   venv\Scripts\activate      # Windows
 
 2. 필수 라이브러리 설치
-- pip install -r requirements.txt
-- requirements.txt
    ```bash
+   pip install -r requirements.txt
+   requirements.txt
    psycopg2-binary
    sentence-transformers
    qdrant-client

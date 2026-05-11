@@ -82,9 +82,12 @@ flowchart TD
 
 2. 필수 라이브러리 설치
    ```bash
-   pip install -r requirements.txt
    requirements.txt
-   psycopg2-binary
+   feedparser
+   bs4
+   datetime
+   psycopg2
+   logging
    sentence-transformers
    qdrant-client
    fastapi
@@ -93,6 +96,9 @@ flowchart TD
    torch
    numpy
    pandas
+
+   pip install -r requirements.txt
+   
 
 3. PostgreSQL 설정
    ```bash
@@ -121,25 +127,25 @@ flowchart TD
 
 #### **구성 요소**:
 1. 데이터 수집 및 저장
-	◦ PostgreSQL 테이블 생성 및 입력
-	◦ DB 조회 + 로깅 설정으로 데이터 관리
+	PostgreSQL 테이블 생성 및 입력
+	DB 조회 + 로깅 설정으로 데이터 관리
 2. Qdrant 의미 기반 검색 구축
-	◦ 뉴스 컬렉션 생성
-	◦ Qdrant 서버 실행 및 API 테스트
+	뉴스 컬렉션 생성
+	Qdrant 서버 실행 및 API 테스트
 3. 임베딩 생성 및 삽입
-	◦ SentenceTransformer 임베딩 생성
-	◦ Batch 단위 Insert/Update
+	SentenceTransformer 임베딩 생성
+	Batch 단위 Insert/Update
 4. QA 처리
-	◦ KoELECTRA QA 모델 + MeCab 형태소 분석
-	◦ 입력: input_ids, attention_mask
-	◦ 출력: 자연어 응답 복원
+	KoELECTRA QA 모델 + MeCab 형태소 분석
+	입력: input_ids, attention_mask
+	출력: 자연어 응답 복원
 5. 요약 처리
-	◦ KoBART Summarization 모델
-	◦ 반복 억제, 길이 조절, 다양성 확보
-	◦ 후처리: clean_summary
+	KoBART Summarization 모델
+	반복 억제, 길이 조절, 다양성 확보
+	후처리: clean_summary
 6. 서비스 구성
-	◦ FastAPI 실행 및 /search 엔드포인트 제공
-	◦ 출력: QA + 요약 결과 + 출처 정보
+	FastAPI 실행 및 /search 엔드포인트 제공
+	출력: QA + 요약 결과 + 출처 정보
 
 ```mermaid
 flowchart TD

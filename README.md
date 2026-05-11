@@ -60,34 +60,86 @@ flowchart TD
 ```
 
 ### 45. Transformer RAG (Qdrant 기반)
-- **파일**: `LLM/23.transformer_rag2.ipynb`, `LLM/llm_app/transformer_rag2_23_app.py`
-- **학습 목표**: 실무형 RAG 파이프라인 이해 및 적용
-- **구성 요소**:
-  1. **데이터 수집 및 저장**  
-     - PostgreSQL 테이블 생성 및 입력  
-     - DB 조회 + 로깅 설정으로 데이터 관리  
-  2. **Qdrant 의미 기반 검색 구축**  
-     - 뉴스 컬렉션 생성  
-     - Qdrant 서버 실행: `.\LLM\qdrant\qdrant.exe`  
-     - API 테스트: `curl http://localhost:6333/collections`  
-  3. **임베딩 생성 및 삽입**  
-     - SentenceTransformer 임베딩 생성  
-     - Batch 단위 Insert/Update  
-  4. **QA 처리**  
-     - KoELECTRA QA 모델 + MeCab 형태소 분석  
-     - 입력: `input_ids`, `attention_mask`  
-     - 출력: 자연어 응답 복원  
-  5. **요약 처리**  
-     - KoBART Summarization 모델  
-     - 반복 억제, 길이 조절, 다양성 확보  
-     - 후처리: `clean_summary`  
-  6. **서비스 구성**  
-     - FastAPI 실행:  
-       ```bash
-       uvicorn LLM.llm_app.transformer_rag2_23_app:app --reload
-       ```  
-     - 엔드포인트: `/search`  
-     - 출력: QA + 요약 결과 + 출처 정보  
+한국어 뉴스 데이터를 PostgreSQL에 저장하고, Qdrant를 활용해 의미 기반 검색을 수행하는 RAG 파이프라인 프로젝트입니다.
+
+- **프로젝트 파일**
+- Notebook: `LLM/24.transformer_rag3.ipynb`
+- App 코드: `LLM/llm_app/transformer_rag3_24_app.py`
+
+- **학습 목표**
+- 실무형 RAG 파이프라인 이해 및 적용
+- PostgreSQL + Qdrant + SentenceTransformer 기반 검색 시스템 구축
+
+- **설치 및 실행 방법**
+
+1. 환경 준비
+- Python 3.9 이상 설치
+- 가상환경 생성 및 활성화:
+  ```bash
+  python -m venv venv
+  source venv/bin/activate   # Mac/Linux
+  venv\Scripts\activate      # Windows
+
+2. 필수 라이브러리 설치
+- pip install -r requirements.txt
+- requirements.txt
+   ```bash
+   psycopg2-binary
+   sentence-transformers
+   qdrant-client
+   fastapi
+   uvicorn
+   transformers
+   torch
+   numpy
+   pandas
+
+3. PostgreSQL 설정
+   ```bash
+   CREATE DATABASE newsdb;
+   CREATE USER newsuser WITH PASSWORD '1234';
+   GRANT ALL PRIVILEGES ON DATABASE newsdb TO newsuser;
+
+   CREATE TABLE news_articles (
+      id SERIAL PRIMARY KEY,
+      title TEXT,
+      content TEXT,
+      url TEXT UNIQUE,
+      published_at TIMESTAMP,
+      source_name TEXT
+   );
+
+4. Qdrant 실행
+   ```bash
+   ./LLM/qdrant/qdrant.exe
+   curl http://localhost:6333/collections
+
+5. FastAPI 서비스 실행
+   ```bash
+   uvicorn LLM.llm_app.transformer_rag3_24_app:app --reload
+   엔드포인트: /search
+
+-- **구성 요소**:
+1. 데이터 수집 및 저장
+	◦ PostgreSQL 테이블 생성 및 입력
+	◦ DB 조회 + 로깅 설정으로 데이터 관리
+2. Qdrant 의미 기반 검색 구축
+	◦ 뉴스 컬렉션 생성
+	◦ Qdrant 서버 실행 및 API 테스트
+3. 임베딩 생성 및 삽입
+	◦ SentenceTransformer 임베딩 생성
+	◦ Batch 단위 Insert/Update
+4. QA 처리
+	◦ KoELECTRA QA 모델 + MeCab 형태소 분석
+	◦ 입력: input_ids, attention_mask
+	◦ 출력: 자연어 응답 복원
+5. 요약 처리
+	◦ KoBART Summarization 모델
+	◦ 반복 억제, 길이 조절, 다양성 확보
+	◦ 후처리: clean_summary
+6. 서비스 구성
+	◦ FastAPI 실행 및 /search 엔드포인트 제공
+	◦ 출력: QA + 요약 결과 + 출처 정보
 
 ```mermaid
 flowchart TD

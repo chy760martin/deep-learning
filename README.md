@@ -68,8 +68,8 @@ flowchart TD
 
 #### **학습 목표**
 - 실무형 RAG 파이프라인 이해 및 적용
-- RSS/뉴스 수집 모듈
-- Qdrant 검색 : Qdrant 의미 기반 검색
+- 데이터 수집 적용 : RSS/뉴스 수집 모듈
+- Qdrant 검색 적용 : Qdrant 의미 기반 검색
 - QA 모델 적용 : embedding + qdrant + QA Model
 - 요약 모델 적용 : embedding + qdrant + Summary Model
 

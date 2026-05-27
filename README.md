@@ -81,19 +81,14 @@ flowchart TD
 2. 필수 라이브러리 설치
 - requirements.txt
    ```bash
-   feedparser
-   bs4
-   datetime
-   psycopg2
-   logging
-   sentence-transformers
-   qdrant-client
-   fastapi
-   uvicorn
-   transformers
-   torch
-   numpy
-   pandas
+   torch==2.2.2
+   transformers==4.57.6
+   sentence-transformers==5.1.2
+   qdrant-client==1.16.1
+   fastapi==0.128.8
+   uvicorn==0.39.0
+   flask==3.1.3
+   pyyaml==6.0.3
 - 라이브러리 설치
    ```bash
    pip install -r requirements.txt

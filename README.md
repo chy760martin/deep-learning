@@ -68,7 +68,10 @@ flowchart TD
 
 #### **학습 목표**
 - 실무형 RAG 파이프라인 이해 및 적용
-- PostgreSQL + Qdrant + SentenceTransformer 기반 검색 시스템 구축
+- RSS/뉴스 수집 모듈
+- Qdrant 검색 : Qdrant 의미 기반 검색
+- QA 모델 적용 : embedding + qdrant + QA Model
+- 요약 모델 적용 : embedding + qdrant + Summary Model
 
 #### **설치 및 실행 방법**
 1. 환경 준비

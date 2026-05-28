@@ -64,7 +64,7 @@ flowchart TD
 
 #### **프로젝트 파일**
 - Notebook: `LLM/24.transformer_rag3.ipynb`
-- App 코드: `LLM/llm_app/transformer_rag3_24_app.py`
+- App 코드: `LLM/rag_system/api_server.py`
 
 #### **학습 목표**
 - 실무형 RAG 파이프라인 이해 및 적용
@@ -115,8 +115,10 @@ flowchart TD
    curl http://localhost:6333/collections
 5. FastAPI 서비스 실행
    ```bash
-   uvicorn LLM.llm_app.transformer_rag3_24_app:app --reload
+   python ./LLM/rag_system/api_server.py
    엔드포인트: /search
+   엔드포인트: /qa
+   엔드포인트: /summary
 
 #### **구성 요소**
 1. 데이터 수집 및 저장
@@ -137,19 +139,45 @@ flowchart TD
 	- 반복 억제, 길이 조절, 다양성 확보
 	- 후처리: clean_summary
 6. 서비스 구성
-	- FastAPI 실행 및 /search 엔드포인트 제공
-	- 출력: QA + 요약 결과 + 출처 정보
+	- FastAPI 실행 및 엔드포인트 제공
+   - Qdrant 의미 기반 검색 결과: /search
+   - QA 모델 답변 결과: /qa
+   - Summary 모델 요약 결과: /summary
+	- 출력시: 출처 정보 포함
+
 ```mermaid
 flowchart TD
     A[사용자 질의] --> B[FastAPI 엔드포인트 /search]
     B --> C[SentenceTransformer 임베딩 생성]
     C --> D[Qdrant 의미 기반 검색]
     D --> E[관련 문서 반환]
-    E --> F[KoELECTRA QA 모델 + MeCab 형태소 분석]
+    E --> F[KoELECTRA QA 모델]
     F --> G[KoBART Summarization + clean_summary]
     G --> H[응답 + 출처 표시]
     H --> I[외부 LLM 서비스 연계 검토]
     I --> J[최종 사용자 응답]
+```
+
+7. 디렉토리 구조
+
+```
+rag_system/
+│
+├── collector.py        # RSS/뉴스 수집 모듈
+├── qdrant_utils.py     # Qdrant Collection 생성
+├── indexer.py          # 색인용 데이터 추출 + 임베딩 변환 + Qdrant 인덱싱(Qdrant news_articles 컬렉션 update/insert)
+├── qdrant_seart.py     # Qdrant 검색(Query 의미 기반 검색)
+├── qa_model.py         # QA 모델 추론 로직(QA 모델 적용 : embedding + qdrant + QA Model)
+├── summary_model.py    # 요약 모델 추론 로직(요약 모델 적용 : embedding + qdrant + Summary Model)
+├── api_server.py       # FastAPI/Flask 기반 REST API 서버
+│
+├── configs/            # DB, Qdrant, 모델 설정 파일
+│   └── settings.yaml
+│
+├── logs/               # 실행 로그 저장
+│   └── rag_app.log
+│
+└── requirements.txt    # 의존성 패키지 목록
 ```
 
 ### 44. Transformer RAG (FAISS 기반)

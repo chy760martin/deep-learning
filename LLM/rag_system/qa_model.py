@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 # 디바이스 설정
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-logger.info(f"PyTorch Version : {torch.__version__}, Device : {device}")
+# logger.info(f"PyTorch Version : {torch.__version__}, Device : {device}")
 
 # embedding
 embedder_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -151,36 +151,131 @@ def clean_answer(answer: str):
 
     return text
 
+# FastAPI 서비스
+def run_qa(query: str) -> dict: # 딕셔너리 데이터 형태로 값을 반환
+    # Qdrant 검색 호출
+    search_result = search_qdrant(query)
+
+    # 검색된 문서들을 후처리
+    contexts = [
+        {
+            "content": clean_content(r.payload.get("content", "")),
+            "source": r.payload.get("source_name", "출처 없음"),
+            "url": r.payload.get("url", ""),
+            "title": r.payload.get("title", ""),
+            "score": r.score
+        }
+        for r in search_result
+    ]
+
+    # 여러 문서들을 하나의 문자열로 합친다
+    context = " ".join(doc["content"] for doc in contexts)
+
+    # QA 모델: 질문(question)/문서(context)를 입력으로 받아서 답변을 복원 또는 생성
+    # Qdrant 의미 기반 검색 -> QA 모델 답변 생성 + 출처 정보 + URL 정보
+    qa_answers = []
+    qa_sources = []
+    for i, doc in enumerate(contexts):
+        # qa 모델 파이프라인(질문, 문서), 대상 문서에 따라서 top_k 후보를 20까지 늘려 복원의 다양성 및 품질 개선
+        ans = qa_pipeline(question=query, context=doc["content"], top_k=5)
+
+        if ans:
+            # top_k 만큼의 후보내에서 필터링: 최소 3글자 이상, 질문과 동일하지 않은 답변
+            valid_answers = [
+                a for a, s in ans 
+                if len(a.strip()) >= 3 # 최소 3글자 이상
+                and query.strip() not in a.strip() # 답변에 질문 문장이 포함되지 않음
+                and not a.strip().startswith(query.strip()) # 답변이 질문으로 시작하지 않음
+            ]
+            # logging.info(f"valid_answers : {valid_answers}")
+
+            if not valid_answers:
+                # fallback: 검색 문서 첫 문장
+                best_answer = doc["content"].split(".")[0].strip()
+            else:
+                # 가장 긴 답변 선택
+                best_answer = max(valid_answers, key=len)
+            
+            # 최종 안전장치
+            if not best_answer or not best_answer.strip():
+                best_answer = "내용 없음"
+            
+            # 출처 정보 병합
+            source_info = doc.get("source", "출처 없음")
+
+            # URL 정보 병합
+            url_info = doc.get("url", "")
+
+            # Title 정보 병합
+            title_info = doc.get("title", "")
+
+            # Score 정보 병합
+            score_info = doc.get("score", "")
+            
+            qa_answers.append(f"{i+1} {clean_answer(answer=best_answer)}")
+
+            # qa_answers.append(f"{i+1} {clean_answer(answer=best_answer)} (출처: {source_info}) (URL: {url_info})")
+
+            qa_sources.append({
+                "title": title_info,
+                "url": url_info,
+                "source_name": source_info,
+                "score": score_info
+            })
+
+    # 최종 답변 선택
+    if qa_answers:
+        final_qa_answers = qa_answers
+    else:
+        # QA 모델 답변 실패시 검색 문서 전체를 fallback으로 사용
+        final_qa_answers = context
+
+    # 반환값 리스트 문자열 구분
+    if isinstance(final_qa_answers, list):
+        # 리스트일 경우 -> 문자열을 합친다
+        answer = " ".join(final_qa_answers) # 리스트 -> 문자열 변환
+    else:
+        # 문자열일 경우 그대로 사용
+        answer = final_qa_answers
+    
+    sources = qa_sources
+    return {
+        "answer": answer,
+        "sources": sources 
+    }
 
 # qdrant 검색 결과
 query = "이란 전쟁 상황에 대해 알려줘"
 search_result = search_qdrant(query)
-for r in search_result:
-    logger.info(
-        f"Score: {r.score:.4f}, "
-        f"Title: {r.payload.get('title')}, "
-        f"Source: {r.payload.get('source_name')}, "
-        f"URL: {r.payload.get('url')}, "
-        f"Content: {r.payload.get('content')}"
-    )
+# for r in search_result:
+#     logger.info(
+#         f"Score: {r.score:.4f}, "
+#         f"Title: {r.payload.get('title')}, "
+#         f"Source: {r.payload.get('source_name')}, "
+#         f"URL: {r.payload.get('url')}, "
+#         f"Content: {r.payload.get('content')}"
+#     )
 
 # 검색된 문서들을 후처리
 contexts = [
     {
         "content": clean_content(r.payload.get("content", "")),
         "source": r.payload.get("source_name", "출처 없음"),
-        "url": r.payload.get("url", "")
+        "url": r.payload.get("url", ""),
+        "title": r.payload.get("title", ""),
+        "score": r.payload.get("score", "")
     }
     for r in search_result
 ]
 
 # 여러 문서들을 하나의 문자열로 합친다
 context = " ".join(doc["content"] for doc in contexts)
-logger.info(f"context : {context}")
+# logger.info(f"context : {context}")
 
 # QA 모델: 질문(question)/문서(context)를 입력으로 받아서 답변을 복원 또는 생성
 # Qdrant 의미 기반 검색 -> QA 모델 답변 생성 + 출처 정보 + URL 정보
 qa_answers = []
+qa_sources = []
 for i, doc in enumerate(contexts):
     # qa 모델 파이프라인(질문, 문서), 대상 문서에 따라서 top_k 후보를 20까지 늘려 복원의 다양성 및 품질 개선
     ans = qa_pipeline(question=query, context=doc["content"], top_k=5)
@@ -211,8 +306,23 @@ for i, doc in enumerate(contexts):
 
         # URL 정보 병합
         url_info = doc.get("url", "")
+
+        # Title 정보 병합
+        title_info = doc.get("title", "")
+
+        # Score 정보 병합
+        score_info = doc.get("score", "")
         
-        qa_answers.append(f"{i+1} {clean_answer(answer=best_answer)} (출처: {source_info}) (URL: {url_info})")
+        qa_answers.append(f"{i+1} {clean_answer(answer=best_answer)}")
+
+        # qa_answers.append(f"{i+1} {clean_answer(answer=best_answer)} (출처: {source_info}) (URL: {url_info})")
+
+        qa_sources.append({
+            "title": title_info,
+            "url": url_info,
+            "source_name": source_info,
+            "score": score_info
+        })
 
 # logging.info(f"qa_answers : {qa_answers}")
 
@@ -222,13 +332,13 @@ if qa_answers:
 else:
     # QA 모델 답변 실패시 검색 문서 전체를 fallback으로 사용
     final_qa_answers = context
-logger.info(f"질문 : {query}")
-logger.info(f"답변 : {final_qa_answers}")
+# logger.info(f"질문 : {query}")
+# logger.info(f"답변 : {final_qa_answers}")
 
 # 메모리 정리: 객체 삭제, 메모리 반환
-del qa_tokenizer
-del qa_model
-del embedder_model
+# del qa_tokenizer
+# del qa_model
+# del embedder_model
 
 gc.collect()
 # GPU cuda 사용시 메모리 반환

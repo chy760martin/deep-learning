@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 # 디바이스 설정
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-logger.info(f"PyTorch Version : {torch.__version__}, Device : {device}")
+# logger.info(f"PyTorch Version : {torch.__version__}, Device : {device}")
 
 # embedding(sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
 # 기반 구조 : Microsoft의 MiniLM을 기반으로 한 경량 Transformer 모델
@@ -137,6 +137,8 @@ def clean_answer(answer: str):
     text = re.sub(r'기사 더보기', '', text)
     text = re.sub(r'신문에서', '', text)
     text = re.sub(r'Google 뉴스에서', '', text)
+    text = re.sub(r'(보기|더보기|뉴스|Google|Goog gle|헤드라인)', '', text)
+    text = re.sub(r'(^|\s)에서(\s|$)', ' ', text) # 문장 중간의 "서울에서"는 유지, 단독 "에서"는 제거
 
     # 너무 긴 답변은 앞 200자 까지만 사용
     if len(text) > 200:
@@ -148,17 +150,68 @@ def clean_answer(answer: str):
 
     return text
 
+# FastAPI 서비스
+def run_summary(query: str) -> dict:
+    # Qdrant 검색 호출
+    search_result = search_qdrant(query=query)
+
+    # 검색된 문서들을 후처리
+    contexts = [
+        {
+            "content": clean_content(r.payload.get("content", "")),
+            "source": r.payload.get("source_name", "출처 없음"),
+            "url": r.payload.get("url", ""),
+            "title": r.payload.get("title", ""),
+            "score": r.score
+        }
+        for r in search_result
+    ]
+
+    # 문서별 요약 후 병합
+    summaries = []
+    for doc in contexts:
+        if doc["content"].strip(): # content가 공백이 아닐 때만 요약
+            doc_summary = summarize_text(context=doc["content"], max_length=80, min_length=30)
+            summaries.append(clean_answer(doc_summary))
+    
+    # 중복 문장 제거
+    def deduplicate_sentences(text: str):
+        # 문장 단위로 분리 (마침표, 물음표, 느낌표 기준)
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+        unique_sentences = list(dict.fromkeys([s.strip() for s in sentences if s.strip()]))
+        return " ".join(unique_sentences)
+
+    answer = deduplicate_sentences("\n".join(summaries)) if summaries else "내용 없음"
+    logging.info(f"answer: {answer}")
+
+    # 출처 매핑
+    summary_sources = [ # 데이터 타입: list
+        {
+            "title": doc["title"],
+            "url": doc["url"],
+            "source_name": doc["source"],
+            "score": float(doc["score"]) if doc["score"] else 0.0
+        }
+        for doc in contexts
+    ]
+
+    return {
+        "answer": answer, # 문자열 반환
+        "sources": summary_sources # 문서별 dict 리스트 반환
+    }
+
+
 # Qdrant 검색
 query = "이란 전쟁 상황에 대해 알려줘"
 search_result = search_qdrant(query=query)
-for r in search_result:
-    logger.info(
-        f"Score: {r.score:.4f}, "
-        f"Title: {r.payload.get('title')}, "
-        f"Source: {r.payload.get('source_name')}, "
-        f"URL: {r.payload.get('url')}, "
-        f"Content: {r.payload.get('content')}"
-    )
+# for r in search_result:
+#     logger.info(
+#         f"Score: {r.score:.4f}, "
+#         f"Title: {r.payload.get('title')}, "
+#         f"Source: {r.payload.get('source_name')}, "
+#         f"URL: {r.payload.get('url')}, "
+#         f"Content: {r.payload.get('content')}"
+#     )
 
 # 검색된 문서들을 context로 합치기
 contexts = [
@@ -172,7 +225,7 @@ contexts = [
 
 # 여러 문서들을 하나의 문자열로 합치기
 context = " ".join(doc["content"] for doc in contexts)
-logger.info(f"여러 문서들을 하나의 문자열로: {context}")
+# logger.info(f"여러 문서들을 하나의 문자열로: {context}")
 
 # 요약: 검색문서들을 요약
 summary = summarize_text(context=context, max_length=100, min_length=40)
@@ -193,18 +246,18 @@ source_url_info = [
     for doc in contexts
 ]
 
-logger.info(f"검색 문서들을 요약: {summary}\n\n출처 정보: {', '.join(source_url_info)}")
+# logger.info(f"검색 문서들을 요약: {summary}\n\n출처 정보: {', '.join(source_url_info)}")
 
 # 요약: 검색 질의문 + 검색 결과
 combined_input = f"질문: {query}\n답변: {context}"
 qdrant_summary = summarize_text(context=combined_input, max_length=150, min_length=50)
 qdrant_summary = clean_answer(qdrant_summary)
-logger.info(f"검색 질의문 + 검색 결과들을 요약: {qdrant_summary}\n\n출처 정보: {', '.join(source_url_info)}")
+# logger.info(f"검색 질의문 + 검색 결과들을 요약: {qdrant_summary}\n\n출처 정보: {', '.join(source_url_info)}")
 
 # 메모리 정리: 객체 삭제, 메모리 반환
-del summarizer_tokenizer
-del summarizer_model
-del embedder_model
+# del summarizer_tokenizer
+# del summarizer_model
+# del embedder_model
 
 gc.collect()
 # GPU cuda 사용시 메모리 반환

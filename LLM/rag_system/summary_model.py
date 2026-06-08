@@ -167,22 +167,17 @@ def run_summary(query: str) -> dict:
         for r in search_result
     ]
 
-    # 문서별 요약 후 병합
-    summaries = []
-    for doc in contexts:
-        if doc["content"].strip(): # content가 공백이 아닐 때만 요약
-            doc_summary = summarize_text(context=doc["content"], max_length=80, min_length=30)
-            summaries.append(clean_answer(doc_summary))
-    
-    # 중복 문장 제거
-    def deduplicate_sentences(text: str):
-        # 문장 단위로 분리 (마침표, 물음표, 느낌표 기준)
-        sentences = re.split(r'(?<=[.!?])\s+', text)
-        unique_sentences = list(dict.fromkeys([s.strip() for s in sentences if s.strip()]))
-        return " ".join(unique_sentences)
+    # 여러 문서들을 하나의 문자열로 합치기
+    context = " ".join(doc["content"] for doc in contexts)
 
-    answer = deduplicate_sentences("\n".join(summaries)) if summaries else "내용 없음"
-    logging.info(f"answer: {answer}")
+    # 요약: 검색 질의문 + 검색 결과
+    combined_input = f"질문: {query}\n답변: {context}"
+
+    # 요약 실행
+    qdrant_summary = summarize_text(context=combined_input, max_length=150, min_length=50)
+
+    # 요약 후처리
+    qdrant_summary = clean_answer(qdrant_summary)
 
     # 출처 매핑
     summary_sources = [ # 데이터 타입: list
@@ -196,7 +191,7 @@ def run_summary(query: str) -> dict:
     ]
 
     return {
-        "answer": answer, # 문자열 반환
+        "answer": qdrant_summary, # 문자열 반환
         "sources": summary_sources # 문서별 dict 리스트 반환
     }
 

@@ -113,6 +113,36 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
+            Align(
+              alignment: Alignment.bottomCenter, // 화면 하단 중앙에 위치
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.only(
+                    top: 10.0
+                  ),
+                  color: Theme.of(context).canvasColor,
+                  child: const TextField( // 실제 댓글 입력 UI
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        top: 5.0,
+                        bottom: 5.0,
+                        left: 10.0,
+                      ),
+                      border: OutlineInputBorder(),
+                      hintText: "댓글 작성",
+                      suffixIcon: Icon(
+                        Icons.send,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

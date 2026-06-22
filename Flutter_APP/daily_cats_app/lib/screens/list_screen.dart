@@ -89,7 +89,7 @@ class _ListScreenState extends State<ListScreen> {
           // onTap() 이벤트가 발생하면 리스트 화면 위에 상세 화면을 쌓아 올린다(실제 사용자는 상세 화면만 보임)
           onTap: () {
             // 현재 화면(context)에서 새로운 화면(Route)을 스택(stack)에 추가(push), 닫기(pop)
-            Navigator.of(context).push( // 현재 context에서 가장 가까운 Navigator를 찾아서 -> 새로운 화면(Route)를 스택에 추가
+            Navigator.of(context).push( // Navigator.of(context).push() 메서드를 사용했을 경우, 앱바[뒤로가기] 버튼 및 동작은 자동 구현된다
               MaterialPageRoute( // 화면 전환 클래스, 머티리얼 디자인 스타일의 화면 전환 애니메이션 제공
                 // 새로운 화면을 어떻게 그릴지 정의하는 부분이고, 여기서는 DetailScreen 위젝을 생성해서 보여준다
                 builder: (context) => DetailScreen(

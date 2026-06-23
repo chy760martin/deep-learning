@@ -62,6 +62,7 @@ class _UploadScreenState extends State<UploadScreen> {
                       if (path == null) return;
                       setState(() {
                         imagePath = path;
+                        // print("선택한 이미지 경로: $imagePath");
                       });
                     });
                   },

@@ -1,4 +1,6 @@
 import 'package:daily_cats_app/screens/detail_screen.dart';
+import 'package:daily_cats_app/screens/upload_screen.dart';
+import 'package:daily_cats_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/cat.dart';
 
@@ -65,10 +67,26 @@ class _ListScreenState extends State<ListScreen> {
         title: const Text("Daily Cats"),
         actions: [
           // 업로드 화면으로 이동
-          IconButton( 
+          IconButton( // 카메라 버튼 클릭시 "사진 업로드" 다이얼로그가 나오도록 함
             icon: const Icon(Icons.camera_alt),
-            onPressed: () {},
-            )
+            onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (_) => const UploadScreen(), // (_) (context) 매개변수 사용 안함, 사진 업로드 화면
+              );
+            },
+          ),
+          // 회원가입 화면으로 이동
+          IconButton(
+            icon: const Icon(Icons.person_add), // 회원가입 아이콘
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const RegisterScreen(), // 회원가입 화면으로 이동
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: GridView.builder(

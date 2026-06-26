@@ -1,3 +1,4 @@
+import 'package:daily_cats_app/screens/api_screen.dart';
 import 'package:daily_cats_app/screens/detail_screen.dart';
 import 'package:daily_cats_app/screens/upload_screen.dart';
 import 'package:daily_cats_app/screens/register_screen.dart';
@@ -83,6 +84,17 @@ class _ListScreenState extends State<ListScreen> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const RegisterScreen(), // 회원가입 화면으로 이동
+                ),
+              );
+            },
+          ),
+          // API 호출 화면으로 이동
+          IconButton(
+            icon: Icon(Icons.cloud), // API 아이콘
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ApiScreen(), // API 호출 화면으로 이동
                 ),
               );
             },

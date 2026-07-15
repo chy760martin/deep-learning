@@ -1,6 +1,7 @@
 import 'package:calendar_scheduler/const/colors.dart';
 import 'package:flutter/material.dart';
 
+// 오늘 날짜 보여주는 TodayBanner 위젯
 class TodayBanner extends StatelessWidget {
   final DateTime selectedDate; // 선택된 날짜 저장
   final int count; // 일정 개수 저장

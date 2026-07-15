@@ -8,7 +8,6 @@ class MainCalendar extends StatelessWidget {
   final OnDaySelected onDaySelected; // 날짜 선택시 실행할 함수 변수에 저장
   final DateTime selectedDate; // 선택된 날짜 변수에 저장
 
-  // HomeScreen 클래스 -> MainCalendar 생성자로 selectedDate, onDaySelected 전달
   MainCalendar({
     required this.onDaySelected, // 콜백 함수를 전달 받는다
     required this.selectedDate,  // 선택 날짜를 전달 받는다

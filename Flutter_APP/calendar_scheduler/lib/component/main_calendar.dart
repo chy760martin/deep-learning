@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MainCalendar extends StatelessWidget {
-  // const MainCalendar({super.key});
-  final OnDaySelected onDaySelected; // 날짜 선택시 실행할 함수
-  final DateTime selectedDate; // 선택된 날짜
+  // selectedDate, onDaySelected 전달 받은 파라미터를 selectedDate, onDaySelected 변수에 저장
+  final OnDaySelected onDaySelected; // 날짜 선택시 실행할 함수 변수에 저장
+  final DateTime selectedDate; // 선택된 날짜 변수에 저장
 
-  // 생성자
+  // HomeScreen 클래스 -> MainCalendar 생성자로 selectedDate, onDaySelected 전달
   MainCalendar({
-    required this.onDaySelected,
-    required this.selectedDate,
+    required this.onDaySelected, // 콜백 함수를 전달 받는다
+    required this.selectedDate,  // 선택 날짜를 전달 받는다
   });
 
   @override
@@ -19,7 +19,7 @@ class MainCalendar extends StatelessWidget {
     return TableCalendar(
       onDaySelected: onDaySelected, // 날짜 선택시 실행할 함수
       
-      // 선택된 날짜를 구분할 로직
+      // 선택된 날짜를 구분할 로직, 년/월/일 true 값 반환
       selectedDayPredicate: (date) =>
         date.year == selectedDate.year &&
         date.month == selectedDate.month &&

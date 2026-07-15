@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               selectedDate: selectedDate, 
               count: 0,
             ),
-            ScheduleCard( // 구현해둔 일정 카드
+            ScheduleCard( // 일정 카드 추가
               startTime: 12, 
               endTime: 14, 
               content: '프로그래밍 공부',

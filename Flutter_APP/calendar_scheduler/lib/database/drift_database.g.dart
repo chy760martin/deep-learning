@@ -1,5 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
+// drift 생성 코드 및 아래와 같이 명령어 실행 후 생성된 코드
+// 터미널에서 실행 명령어 : flutter pub run build_runner build
 part of 'drift_database.dart';
 
 // **************************************************************************

@@ -1,21 +1,28 @@
 import 'package:calendar_scheduler/component/custom_text_field.dart';
 import 'package:calendar_scheduler/const/colors.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
+import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class ScheduleBottomSheet extends StatefulWidget {
-  const ScheduleBottomSheet({super.key});
+  final DateTime selectedDate; // 선택된 날짜 상위 위젯에서 입력값을 저장
+
+  const ScheduleBottomSheet({
+    required this.selectedDate, // 외부로부터 선택된 날짜를 받아온다
+    super.key,
+  });
 
   @override
   State<ScheduleBottomSheet> createState() => _ScheduleBottomSheetState();
 }
 
 class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
-    // 폼 key 생성
-    final GlobalKey<FormState> formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey(); // 폼 key 생성
 
-    int? startTime; // 시작 시간 저장 변수
-    int? endTime; // 종료 시간 저장 변수
-    String? content; // 일정 내용 저장 변수
+  int? startTime; // 시작 시간 저장 변수
+  int? endTime; // 종료 시간 저장 변수
+  String? content; // 일정 내용 저장 변수
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +101,25 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
   }
 
   // onSavePressed 저장 버튼 함수
-  void onSavePressed() {
+  void onSavePressed() async {
     // 버튼 클릭시 -> validate() 실행 -> 모든 validator(timeValidator/contentValidator) 함수 호출
     if (formKey.currentState!.validate()) {
       // 검증 성공시 -> save() 실행 -> 모든 onSaved 함수 호출
       formKey.currentState!.save(); // 폼 저장하기
+      
+      // 일정 생성하기, LocalDatabase 클래스 createSchedule 함수 실행
+      await GetIt.I<LocalDatabase>().createSchedule(
+        // 단 매개변수에 SchedulesCompanion 클래스에는 실제 Schedules 테이블 입력될 값들을
+        // 드리프트 패키지에서 제공하는 Value라는 클래스로 감싸서 입력해줘야 한다
+        SchedulesCompanion(
+          startTime: Value(startTime!),
+          endTime: Value(endTime!),
+          content: Value(content!),
+          date: Value(widget.selectedDate),
+        ),
+      );
 
-      print(startTime); // 시작 시간 출력
-      print(endTime); // 종료 시간 출력
-      print(content); // 내용 출력
+      Navigator.of(context).pop(); // 일정 생성 후 화면 뒤로 가기
     }
   }
 

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart'; // geolocator 패키지 임포트
-import 'package:http/http.dart' as http; // http 패키지 임포트 http 별칭 사용
+// import 'package:geolocator/geolocator.dart'; // geolocator 패키지 임포트
+// import 'package:http/http.dart' as http; // http 패키지 임포트 http 별칭 사용
+// import 'dart:convert';
+import 'package:weather_app_part1/data/my_location.dart';
+import 'package:weather_app_part1/data/network.dart';
+import 'package:weather_app_part1/screen/weather_screen.dart'; // JSON 데이터를 파싱 사용
+const String apiKey = ''; // OpenWeather Map 키 값
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -10,50 +15,35 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  double? myLongitude2; // 경도
+  double? myLatitude2; // 위도
+
   @override
   // 앱 초기 실행
   void initState() {
-    print('test1');
     super.initState();
     getLocation();
-    fetchData();
-    print('test2');
   }
   // 위도/경도 위치 정보
   void getLocation() async {
-    print('test3');
-    // try/catch 예외 상활 처리
-    try {
-      // 권한 요청
-      LocationPermission permission = await Geolocator.requestPermission();
-      // 권한 체크
-      if (permission == LocationPermission.denied) {
-        return;
-      }
-      // 현재 위치
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high
-      );
-      print(position);
-    } catch (e) {
-      print('위치 정보수신에 문제가 생겼습니다 : ${e.toString()}');
-    }
-  }
-  // 외부 인터넷에서 날씨 데이터를 가져오는 로직
-  Future<void> fetchData() async { // 함수에 async 키워드를 붙여야 await를 사용 할 수 있음
-    print('test4');
-    // http.get()의 반환값(Future<Response>)을 await로 풀어서 Response 타입 변수에 담는다, http.get() 비동기 함수라서 Future<Response>를 반환
-    final http.Response response = await http.get( // http.get() 메서드에 url 전달함(Uri.parse()를 통해서 url 정보)
-      Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=London&appid=')
-    );
+    MyLocation myLocation = MyLocation();
+    await myLocation.getMyCurrentLocation();
+    myLatitude2 = myLocation.myLatitude; // 위도
+    myLongitude2 = myLocation.myLongitude; // 경도
 
-    // 정상 체크
-    if (response.statusCode == 200) {
-      print(response.body);
-      print(response.statusCode);
-    } else {
-      print('Failed to load weather data');
-    }
+    // network 인스턴스 생성하고 생성자에 더미 데이터 url 전달
+    // 좌표기반 주소, 위도/경도
+    // Network network = Network('https://api.openweathermap.org/data/2.5/weather?lat=${myLatitude2}&lon=${myLongitude2}&appid=${apiKey}');
+    // 도시 이름 기반 주소, 화씨->섭씨
+    Network network = Network('https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${apiKey}&units=metric');
+    var weatherData = await network.getJsonData(); // Json 데이터 변환
+    print(weatherData);
+    // async 메서드가 비동기 작업을 수행하는 동안 해당 State 객체가 위쳇 트리에서 해제(!mounted) 되었는지 확인하고,
+    // 만약 해제되었다면 setState() 메서드를 호출하지 않도록 한다
+    if (!mounted) return;
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => WeatherScreen(parseWeatherData: weatherData,)
+    ));
   }
 
   Widget build(BuildContext context) {
@@ -63,7 +53,6 @@ class _LoadingState extends State<Loading> {
         child: FilledButton(
           onPressed: () {
             getLocation();
-            fetchData();
           }, 
           child: const Text('Get location')
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_part1/screen/weather_icon.dart'; // 날씨 아이콘
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({
@@ -13,8 +14,10 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  String? cityName;
-  int? myTemp;
+  String? cityName; // 도시명
+  int? myTemp; // 온도
+  Widget? icon; // 아이콘
+  WeatherIcon weatherIcon = WeatherIcon(); // 아이콘 객체 생성
 
   @override
   void initState() {
@@ -30,11 +33,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
     cityName = weatherData['name'];
     double myTemp2 = weatherData['main']['temp'];
     myTemp = myTemp2.round();
+
+    // OpenWeatherMap 날씨 데이터 id 값 가져온다
+    int condition = weatherData['weather'][0]['id'];
+    icon = weatherIcon.getWeatherIcon(condition);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -42,15 +50,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
             children: [
               Text(
                 "$cityName",
-                style: TextStyle(fontSize: 30),
+                style: const TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
               SizedBox(
                 height: 20.0,
               ),
               Text(
                 "$myTemp",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(
+                  fontSize: 85,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white
+                ),
               ),
+              // icon != null: icon null 아니면 
+              // ? icon as Widget: icon as Widget으로 캐스팅 반환
+              // const SizedBox.shrink(): null 이면 빈 위젯을 반환
+              icon != null ? icon as Widget : const SizedBox.shrink(),
             ],
           ),
         )

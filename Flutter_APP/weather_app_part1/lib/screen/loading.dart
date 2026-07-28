@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:geolocator/geolocator.dart'; // geolocator 패키지 임포트
-// import 'package:http/http.dart' as http; // http 패키지 임포트 http 별칭 사용
-// import 'dart:convert';
 import 'package:weather_app_part1/data/my_location.dart';
 import 'package:weather_app_part1/data/network.dart';
 import 'package:weather_app_part1/screen/weather_screen.dart'; // JSON 데이터를 파싱 사용
+import 'package:flutter_spinkit/flutter_spinkit.dart'; // 로딩 인디케이터 사용
+
 const String apiKey = ''; // OpenWeather Map 키 값
 
+// 위젯 생성 → initState() 실행 : 비동기 getLocation()을 실행
+// build() 실행 → UI 표시 : 비동기 작업이 끝나기 전이라도 build()는 바로 호출
+// 비동기 작업 완료 → Navigator.push 호출 : 날씨 데이터를 받아오면 WeatherScreen으로 화면 전환이 일어난다
 class Loading extends StatefulWidget {
   const Loading({super.key});
 
@@ -49,14 +51,25 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      body: Center(
-        child: FilledButton(
-          onPressed: () {
-            getLocation();
-          }, 
-          child: const Text('Get location')
+      body: const Center(
+        child: SpinKitDoubleBounce( // 로딩 인디케이터(애니메이션 위젯)
+          color: Colors.white,
+          size: 80,
         ),
       ),
     );
   }
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+  //     body: Center(
+  //       child: FilledButton(
+  //         onPressed: () {
+  //           getLocation();
+  //         }, 
+  //         child: const Text('Get location')
+  //       ),
+  //     ),
+  //   );
+  // }
 }

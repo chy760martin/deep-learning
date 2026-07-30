@@ -1,4 +1,4 @@
-// Schedules 클래스와 동일하게 모델 구현
+// REST API Schedules 모델 구현
 class ScheduleModel {
   // 외부로 부터 받아온 값을 변수에 저장
   final String id;

@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Network {
-  Network(this.url);
+  Network(this.url); // url 전달
   final String url;
 
   // Future<dynamic> String,int,double  여러가지 타입 

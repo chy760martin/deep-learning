@@ -85,7 +85,7 @@ class _Time extends StatelessWidget {
   }
 }
 
-// 내용을 렌더링할 _Content 위젯
+// 내용을 표현할 _Content 위젯
 class _Content extends StatelessWidget {
   final String content; // 내용 저장
 

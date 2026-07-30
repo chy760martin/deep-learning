@@ -4,7 +4,7 @@ import 'package:weather_app_part1/data/network.dart';
 import 'package:weather_app_part1/screen/weather_screen.dart'; // JSON 데이터를 파싱 사용
 import 'package:flutter_spinkit/flutter_spinkit.dart'; // 로딩 인디케이터 사용
 
-const String apiKey = ''; // OpenWeather Map 키 값
+const String apiKey = 'b9280318ad9cd070df18f8961ee4515d'; // OpenWeather Map 키 값
 
 // 위젯 생성 → initState() 실행 : 비동기 getLocation()을 실행
 // build() 실행 → UI 표시 : 비동기 작업이 끝나기 전이라도 build()는 바로 호출

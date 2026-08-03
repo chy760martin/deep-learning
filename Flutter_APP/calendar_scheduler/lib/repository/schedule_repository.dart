@@ -30,6 +30,27 @@ class ScheduleRepository {
   }
 
   // API POST 요청
+  Future<String> createSchedule({
+    required ScheduleModel schedule,
+  }) async { // async{} 블록을 사용해서 API 요청
+    final json = schedule.toJson(); // JSON 변환
+    final resp = await _dio.post( // API POST 요청
+      _targetUrl,
+      data: json
+    );
+    return resp.data?['id']; // 응답에서 id 추출 후 반환, 최종 반환 타입은 Future<String>
+  }
 
   // API DELETE 요청
+  Future<String> deleteSchedule({
+    required String id,
+  }) async {
+    final resp = await _dio.delete(
+      _targetUrl,
+      data: {
+        'id': id, // 삭제할 id값
+      }
+    );
+    return resp.data?['id']; // 삭제된 id값 반환
+  }
 }
